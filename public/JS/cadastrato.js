@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,9 +19,32 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
 
-function ruan(){
-  document.getElementById("lbl_number");
+function Ryan(){
+    var numero = document.getElementById("lbl_number").value
+    var id;
+    var number;
 
+    const getUser = await getDocs(collection(db, "users"))
+    getUser.forEach((doc) => {
+        id: doc.id
+        number: doc.numero
+    })
+    if(number != 0){
+        console.log("User ")
+    }else{
+        try {
+            const docRef = await addDoc(collection(db, "users"), {
+              numero: numero
+            });
+            console.log("Novo usuario cadastrado", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    }
+}
+function teste(){
+  console.log("OLA MUNDO")
 }
