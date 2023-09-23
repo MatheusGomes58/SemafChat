@@ -1,0 +1,200 @@
+body {
+    background-color: #025920;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  #history-box {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px #888;
+    margin: 100px auto;
+    padding: 20px;
+    max-width: 400px;
+    size: auto;
+  }
+  
+  #history-box h1 {
+    text-align: center;
+    margin: 0px 0px 10px;
+  }
+
+  #history-box input[type="email"], #history-box input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #D9D9D9;
+  }
+
+  #history-box input[type="text"], #history-box input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #D9D9D9;
+  }
+  
+  #history-box input[type="submit"] {
+    display: block;
+    margin: auto;
+    background-color: #01260E;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 50%;
+  }
+  
+  #history-box input[type="submit"]:hover {
+    background-color: #025920;
+  }
+
+  #history-box p {
+    text-align: center;
+    display: block;
+    margin: 10px;
+    font-size: 14px;
+  }
+
+  .img-container{
+    text-align: center;
+    display: block;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #025920;
+    color: white;
+  }
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #voltar {
+    display: block;
+    margin: auto;
+    background-color: #01260E;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 130px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #voltar:hover{
+    background-color: #025920;
+  }
+
+  #next {
+    display: block;
+    margin: auto;
+    background-color: #01260E;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #next:hover{
+    background-color: #025920;
+  }
+
+  #back {
+    display: block;
+    margin: auto;
+    background-color: #01260E;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #back:hover{
+    background-color: #025920;
+  }
+
+  #save {
+    display: block;
+    margin: auto;
+    background-color: #01260E;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #save:hover{
+    background-color: #025920;
+  }
+
+  .containerV {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .row label {
+    text-align: right;
+    margin-right: 10px;
+  }
+  
+  .row input {
+    flex: 1;
+    padding: 5px;
+  }
