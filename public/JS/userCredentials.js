@@ -62,7 +62,7 @@ function logout() {
 }
 
 function getUser() {
-  if(document.title != "Login | RECOWEBAPP"){
+  if(document.title != "Login | DesbravaChat"){
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         currentUser.uid = user.uid
@@ -76,7 +76,7 @@ function getUser() {
           })
         .then(() => {
           setTimeout(() => {
-            window.location.replace("./login.html")
+            window.location.replace("./index.html")
           }, 1000)
         })
       }

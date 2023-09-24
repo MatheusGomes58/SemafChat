@@ -1,7 +1,4 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-const  firebaseConfig = {
+var  firebaseConfig = {
     apiKey: "AIzaSyBZPI36XYbRpAB_qJoOOIgp9fHD1v5t9DI",
     authDomain: "semafchat-60cd1.firebaseapp.com",
     databaseURL: "https://semafchat-60cd1-default-rtdb.firebaseio.com",
@@ -13,6 +10,5 @@ const  firebaseConfig = {
 }
 
 
-const app = initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const analytics = getAnalytics(app);
+firebase.initializeApp(firebaseConfig)
+const db = firebase.firestore()
