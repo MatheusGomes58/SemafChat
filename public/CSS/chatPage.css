@@ -1,27 +1,41 @@
 body {
-    font-family: Arial, sans-serif;
+    background-image: url(../IMG/Wallpapaer.png);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    /* Garante que a imagem ocupe toda a altura da tela */
     margin: 0;
-    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    vertical-align: middle;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
 }
 
 .chat-container {
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 600px;
+    margin: 100px auto;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px #888;
+    border-radius: 30px;
     overflow: hidden;
-}
-
-.chat-header {
-    background-color: #075E54;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
+    max-height: 100%;
+    padding: 20px;
+    size: auto;
 }
 
 .chat-messages {
     padding: 10px;
-    max-height: 400px;
+    max-height: 150px;
+    height: 150px;
     overflow-y: scroll;
 }
 
@@ -33,16 +47,39 @@ body {
     font-weight: bold;
 }
 
-#message-input {
-    flex-grow: 1;
-    border: none;
-    padding: 5px;
-}
-
 #send-button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    align-items: center; 
+    justify-content: center;
     background-color: #25D366;
     color: #fff;
-    border: none;
     padding: 5px 10px;
-    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    height: 100%;
+}
+
+#send-button:hover {
+    background-color: #167c3c;
+}
+
+input#insertMessenger {
+    width: calc(90% - 40px);
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+}
+
+.form-container {
+    display: flex;
+    /* Use flexbox para colocar os elementos na mesma linha */
+    align-items: center;
+    /* Centralize verticalmente os elementos */
 }

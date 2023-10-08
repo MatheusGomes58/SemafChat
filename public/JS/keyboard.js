@@ -7,7 +7,7 @@ const databaseKeyboardNormal = `./IMG/DatabaseOfKeyboard/normal/`
 var typeOfKeyboard = "";
 
 function embaralhar(){
-    shuffleKeys();
+    //shuffleKeys();
     var valor = Math.random()*100;
     if(valor>60){
         typeOfKeyboard = databaseKeyboardBraile;
@@ -24,19 +24,18 @@ function embaralhar(){
 document.addEventListener("DOMContentLoaded", function () {
     const inputField = document.getElementById("insertMessenger");
     const keyboardButtons = document.querySelectorAll(".key");
-
     keyboardButtons.forEach((button) => {
         button.addEventListener("click", function () {
-            const content = button.textContent;
-            
+            const content = button.value;
+            console.log(content)
+
             // Verifica se o conteúdo do botão é uma imagem
             const isImage = button.querySelector("img");
             
-            if (isImage) {
-                const altText = isImage.alt;
-                inputField.value += altText;
-            } else if (content === "<-") {
+            if (content == "-") {
                 inputField.value = inputField.value.slice(0, -1);
+            } else if(content == "+"){
+                //execução de envio da mensagem
             } else {
                 inputField.value += content;
             }
@@ -85,7 +84,9 @@ function renderKeys() {
         "7": "33.png",
         "8": "34.png",
         "9": "35.png",
-        "0": "36.png"
+        "0": "36.png",
+        "+": "37.png",
+        "-": "38.png"
     };
     
 

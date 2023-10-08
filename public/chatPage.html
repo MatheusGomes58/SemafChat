@@ -9,18 +9,13 @@
     <title>Chat App</title>
 </head>
 
-<body>
+<body class="container">
     <div class="chat-container">
         <div class="chat-messages">
-            <div class="message">
-                <div class="message-sender">John</div>
-                <div class="message-text">Hello, how are you?</div>
-            </div>
-            <!-- More messages go here -->
         </div>
-        <div class="chat-input">
+        <div class="form-container">
             <input type="text" id="insertMessenger" placeholder="Type a message..." readonly>
-            <button id="send-button">Send</button>
+            <button id="send-button" class="key" value="+"></button>
         </div>
         <div class="keyboard-container">
             <div class="keyboard">
@@ -67,7 +62,7 @@
                     <button class="key" value="B"></button>
                     <button class="key" value="N"></button>
                     <button class="key" value="M"></button>
-                    <button class="key backspace"><-</button>
+                    <button class="key backspace" value="-"></button>
                 </div>
             </div>
         </div>
