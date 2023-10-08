@@ -48,19 +48,12 @@ body {
 }
 
 #send-button {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    align-items: center; 
-    justify-content: center;
     background-color: #25D366;
-    color: #fff;
+    grid-column: span 2;
+    color: white;
     padding: 5px 10px;
-    border-radius: 10px;
-    font-size: 16px;
-    height: 100%;
+    border: none;
+    cursor: pointer;
 }
 
 #send-button:hover {

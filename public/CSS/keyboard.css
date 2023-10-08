@@ -69,6 +69,18 @@ body {
     background-color: #a83939;
 }
 
+.key.number {
+    grid-column: span 2;
+    background-color: #8ab5ffe8;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.key.number:hover {
+    background-color: #5593ffb2
+}
 
 .key:hover{
     background-color:  #8a888886;

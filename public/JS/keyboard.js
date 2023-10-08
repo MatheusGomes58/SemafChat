@@ -107,9 +107,10 @@ function renderKeys() {
 
 // Função para embaralhar todas as teclas, mantendo os números na mesma linha
 function shuffleKeys() {
-    const keyboard = document.querySelector('.keyboard');
-    const numberRow = keyboard.querySelector('.number-row');
+    const keyboard = document.querySelector('.keyboard-row');
+    const numberRow = document.querySelector('.number-row');
     const allButtons = Array.from(keyboard.querySelectorAll('.key'));
+    const allButtonsNumbers = Array.from(numberRow.querySelectorAll('.key'));
 
     // Exclui a tecla "Backspace" para não ser embaralhada
     const backspaceButton = keyboard.querySelector('.key.backspace');
@@ -127,10 +128,16 @@ function shuffleKeys() {
     }
 
     // Embaralhe todas as teclas
+    shuffleArray(allButtonsNumbers);
     shuffleArray(allButtons);
 
     // Limpa o teclado
     keyboard.innerHTML = '';
+
+    // Reorganize os botões numericos no teclado
+    allButtonsNumbers.forEach(button => {
+        keyboard.appendChild(button);
+    });
 
     // Reorganize os botões no teclado
     allButtons.forEach(button => {
@@ -138,7 +145,7 @@ function shuffleKeys() {
     });
 
     // Adicione a tecla "Backspace" de volta ao teclado
-    keyboard.appendChild(backspaceButton);
+    //keyboard.appendChild(backspaceButton);
 }
 
 // Chame a função para embaralhar os botões quando a página carregar
