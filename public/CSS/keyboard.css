@@ -19,32 +19,41 @@ body {
 .keyboard {
     display: inline-block;
     text-align: center;
-    padding: 10px;
 }
 
 .keyboard-row {
-    display: flex;
-    justify-content: center;
+    max-width: 500px;
     margin-bottom: 5px;
 }
 
 .number-row {
-    display: flex;
-    justify-content: center;
+    max-width: 500px;
     margin-bottom: 5px;
 }
 
 .key {
-    display: inline-block;
     width: 40px;
     height: 40px;
+    display: inline-block;
     margin: 5px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     background-color: #cbc9c986;
     border-radius: 10%;
-    align-items: center; 
-    justify-content: center;
+    flex-shrink: 1; 
+    position: relative; 
 }
+
+.key img {
+    width: 100%; /* Ajuste o tamanho da imagem em relação à largura da tecla */
+    height: 100%; /* Ajuste a altura da imagem em relação à altura da tecla */
+    max-width: 100%; /* Evite que a imagem se estique além da largura da tecla */
+    max-height: 100%; /* Evite que a imagem se estique além da altura da tecla */
+    position: absolute; /* Posicione a imagem dentro da tecla */
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* Centralize a imagem dentro da tecla */
+}
+
 
 .key.backspace {
     grid-column: span 2;
@@ -60,11 +69,6 @@ body {
     background-color: #a83939;
 }
 
-.key img {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-}
 
 .key:hover{
     background-color:  #8a888886;
@@ -72,7 +76,7 @@ body {
 
 
 .number-row {
-    text-align: center;
+    max-width: 500px;
 }
 
 .keyboard-container {

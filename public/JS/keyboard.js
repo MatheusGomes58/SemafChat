@@ -7,7 +7,7 @@ const databaseKeyboardNormal = `./IMG/DatabaseOfKeyboard/normal/`
 var typeOfKeyboard = "";
 
 function embaralhar(){
-    //shuffleKeys();
+    shuffleKeys();
     var valor = Math.random()*100;
     if(valor>60){
         typeOfKeyboard = databaseKeyboardBraile;
