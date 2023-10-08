@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <link rel="icon" type="image/png" href="./IMG/LOGUINHOAMP.png"/>
     <link rel="stylesheet" href="./CSS/chatPage.css">
     <link rel="stylesheet" href="./CSS/keyboard.css">
     <title>Chat App</title>
@@ -15,7 +17,7 @@
         </div>
         <div class="form-container">
             <input type="text" id="insertMessenger" placeholder="Type a message..." readonly>
-            <button id="send-button" class="key" value="+"></button>
+            <button id="send-button" class="key" value="+" onclick="enviarMensagem()"></button>
         </div>
         <div class="keyboard-container">
             <div class="keyboard">
@@ -42,8 +44,6 @@
                     <button class="key" value="I"></button>
                     <button class="key" value="O"></button>
                     <button class="key" value="P"></button>
-                </div>
-                <div class="keyboard-row">
                     <button class="key" value="A"></button>
                     <button class="key" value="S"></button>
                     <button class="key" value="D"></button>
@@ -53,8 +53,6 @@
                     <button class="key" value="J"></button>
                     <button class="key" value="K"></button>
                     <button class="key" value="L"></button>
-                </div>
-                <div class="keyboard-row">
                     <button class="key" value="Z"></button>
                     <button class="key" value="X"></button>
                     <button class="key" value="C"></button>
@@ -62,11 +60,20 @@
                     <button class="key" value="B"></button>
                     <button class="key" value="N"></button>
                     <button class="key" value="M"></button>
+                </div>
+                <div class="keyboard-row">
                     <button class="key backspace" value="-"></button>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+    <script src="./JS/authFirebase.js"></script>
+    <script src="./JS/userCredentials.js"></script>
     <script src="./JS/keyboard.js"></script>
     <script src="./JS/chatPage.js"></script>
 </body>

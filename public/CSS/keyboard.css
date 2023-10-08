@@ -19,6 +19,8 @@ body {
 .keyboard {
     display: inline-block;
     text-align: center;
+    max-height: 300px;
+    overflow-y: scroll;
 }
 
 .keyboard-row {
@@ -62,7 +64,7 @@ body {
     padding: 5px 10px;
     border: none;
     cursor: pointer;
-    border-radius: 100px;
+    border-radius: 10px;
 }
 
 .key.backspace:hover {

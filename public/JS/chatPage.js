@@ -1,55 +1,37 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const messageInput = document.getElementById("insertMessenger");
-    const sendButton = document.getElementById("send-button");
-    const chatMessages = document.querySelector(".chat-messages");
 
-    sendButton.addEventListener("click", function () {
-        const messageText = messageInput.value.trim();
+const messageInput = document.getElementById("insertMessenger");
+const chatMessages = document.querySelector(".chat-messages");
+// Referência para o nó "mensagens" no Realtime Database
+const messagesRef = firebase.database().ref('mensagens');
 
-        if (messageText !== "") {
-            const messageDiv = document.createElement("div");
-            messageDiv.classList.add("message");
+// Função para enviar uma mensagem para o Firebase
+function enviarMensagem() {
+    const mensagem = messageInput.value;
 
-            const senderDiv = document.createElement("div");
-            senderDiv.classList.add("message-sender");
-            senderDiv.textContent = "You";
+    if (mensagem !== '') {
+        // Crie um objeto com a mensagem e a data atual
+        const novaMensagem = {
+            mensagem: mensagem,
+            timestamp: new Date().getTime(),
+        };
 
-            const textDiv = document.createElement("div");
-            textDiv.classList.add("message-text");
-            textDiv.textContent = messageText;
+        // Envie a mensagem para o Realtime Database
+        messagesRef.push().set(novaMensagem);
 
-            messageDiv.appendChild(senderDiv);
-            messageDiv.appendChild(textDiv);
+        // Limpe o campo de mensagem
+        messageInput.value = '';
+    }
+}
 
-            chatMessages.appendChild(messageDiv);
-
-            messageInput.value = "";
-            messageInput.focus();
-
-            // Scroll to the bottom of the chat
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
+// Função para exibir mensagens em tempo real
+function exibirMensagens() {
+    messagesRef.on('child_added', (snapshot) => {
+        const mensagem = snapshot.val();
+        const mensagemElement = document.createElement('div');
+        mensagemElement.innerText = `${mensagem.mensagem}`;
+        chatMessages.appendChild(mensagemElement);
     });
+}
 
-    // Simulate receiving a message
-    setTimeout(function () {
-        const receivedMessageDiv = document.createElement("div");
-        receivedMessageDiv.classList.add("message");
-
-        const senderDiv = document.createElement("div");
-        senderDiv.classList.add("message-sender");
-        senderDiv.textContent = "John";
-
-        const textDiv = document.createElement("div");
-        textDiv.classList.add("message-text");
-        textDiv.textContent = "I'm good, thanks!";
-
-        receivedMessageDiv.appendChild(senderDiv);
-        receivedMessageDiv.appendChild(textDiv);
-
-        chatMessages.appendChild(receivedMessageDiv);
-
-        // Scroll to the bottom of the chat
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 2000);
-});
+// Chame a função para exibir mensagens em tempo real
+exibirMensagens();
