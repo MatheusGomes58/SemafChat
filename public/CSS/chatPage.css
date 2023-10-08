@@ -33,12 +33,6 @@ body {
     font-weight: bold;
 }
 
-.chat-input {
-    display: flex;
-    background-color: #f0f0f0;
-    padding: 10px;
-}
-
 #message-input {
     flex-grow: 1;
     border: none;

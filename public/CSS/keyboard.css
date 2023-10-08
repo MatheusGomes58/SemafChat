@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.keyboard-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    text-align: center;
+}
+
+input#insertMessenger {
+    width: calc(100% - 40px);
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.keyboard {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.number-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.key {
+    display: inline-block;
+    width: 40px;
+    /* Largura fixa para as teclas */
+    height: 40px;
+    /* Altura fixa para as teclas */
+    margin: 5px;
+    /* Espaçamento entre as teclas */
+    border: 1px solid #ccc;
+    background-color: #cbc9c986;
+    cursor: pointer;
+    font-size: 20px;
+    /* Tamanho da fonte */
+    line-height: 40px;
+    /* Centraliza o texto verticalmente */
+    user-select: none;
+    /* Evita seleção de texto ao clicar nas teclas */
+    border-radius: 10%;
+}
+
+.key.backspace {
+    grid-column: span 2;
+    background-color: #ff5555;
+    color: white;
+}
+
+.key img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.backspace {
+    width: 80px;
+    /* Largura maior para a tecla "Backspace" */
+}
+
+.number-row {
+    text-align: center;
+}
+
+.keyboard-container {
+    text-align: center;
+}
