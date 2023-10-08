@@ -22,7 +22,7 @@ function login() {
         })
         .then(() => {
           setTimeout(() => {
-            window.location.replace("./indexPage.html")
+            window.location.replace("./index.html")
           }, 1000)
         })
     })
