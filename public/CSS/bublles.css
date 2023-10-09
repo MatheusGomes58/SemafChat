@@ -1,0 +1,36 @@
+.chat-bubble {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px; /* Cantos arredondados */
+    clear: both;
+    overflow: hidden;
+}
+
+.you {
+    background-color: #3498db;
+    color: #fff;
+    align-self: flex-start;
+    float: left; /* Alinha à esquerda */
+}
+
+.me {
+    background-color: #e74c3c;
+    color: #fff;
+    align-self: flex-end;
+    float: right; /* Alinha à direita */
+}
+
+/* Adicione as regras CSS para a formatação do nome de usuário e timestamp */
+.message-info {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.username {
+    color: #000000;
+    margin-right: 5px;
+}
+
+.timestamp {
+    color: #000000;
+}

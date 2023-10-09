@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
     keyboardButtons.forEach((button) => {
         button.addEventListener("click", function () {
             const content = button.value;
-            console.log(content)
 
             // Verifica se o conteúdo do botão é uma imagem
             const isImage = button.querySelector("img");

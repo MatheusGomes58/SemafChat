@@ -2,6 +2,7 @@ let currentUser = {}
   
 let email = "";
 let password = "";
+let userData = "";
 
 function login() {
   if (firebase.auth().currentUser) {
@@ -22,7 +23,7 @@ function login() {
         })
         .then(() => {
           setTimeout(() => {
-            window.location.replace("./index.html")
+            window.location.replace("./chatPage.html")
           }, 1000)
         })
     })
@@ -85,23 +86,15 @@ function getUser() {
 }
 
 async function getUserInfo() {
-  let userLabel = document.getElementById("useLabel")
-  let userValue = document.getElementById("useValue")
   const logUsers = await db.collection("users").where("user", "==", email).get()
   if (!logUsers.docs.length == 0) {
     profile = true
-    const userData = logUsers.docs[0]
-    userLabel.innerHTML = userData.data().customerName
-    userValue.innerHTML = userData.data().customerValue.toFixed(2)
-    if(userData.data().type == "admin" && !document.title.includes("ADM")){
-      window.location.replace("./indexPageADM.html")
-    }else if(userData.data().type == "user" && document.title.includes("ADM")){
-      window.location.replace("./indexPage.html")
-    }
-    if(document.title == "Histórico | RECOWEBAPP" || document.title == "Histórico ADM | RECOWEBAPP")
-    {
-      renderitems(userData.data().type)
-    }
+    const usersData = logUsers.docs[0]
+    userData = usersData.data().customerName
+    console.log(usersData.data().customerName)
+  }
+  if(document.title == "Bate-Papo | DesbravaChat"){
+    exibirMensagens()
   }
 }
 

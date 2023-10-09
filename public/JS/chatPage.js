@@ -3,16 +3,20 @@ const messageInput = document.getElementById("insertMessenger");
 const chatMessages = document.querySelector(".chat-messages");
 // Referência para o nó "mensagens" no Realtime Database
 const messagesRef = firebase.database().ref('mensagens');
+const now = new Date();
+
 
 // Função para enviar uma mensagem para o Firebase
 function enviarMensagem() {
     const mensagem = messageInput.value;
+    var timeOfMessenger = "" + now.getHours() + ":" + now.getMinutes()
 
     if (mensagem !== '') {
         // Crie um objeto com a mensagem e a data atual
         const novaMensagem = {
             mensagem: mensagem,
-            timestamp: new Date().getTime(),
+            user: userData,
+            timestamp: timeOfMessenger
         };
 
         // Envie a mensagem para o Realtime Database
@@ -27,11 +31,7 @@ function enviarMensagem() {
 function exibirMensagens() {
     messagesRef.on('child_added', (snapshot) => {
         const mensagem = snapshot.val();
-        const mensagemElement = document.createElement('div');
-        mensagemElement.innerText = `${mensagem.mensagem}`;
-        chatMessages.appendChild(mensagemElement);
+        createMenssager(mensagem.mensagem, mensagem.user, mensagem.timestamp);
     });
 }
 
-// Chame a função para exibir mensagens em tempo real
-exibirMensagens();
