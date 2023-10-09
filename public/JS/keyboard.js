@@ -6,17 +6,25 @@ const databaseKeyboardNormal = `./IMG/DatabaseOfKeyboard/normal/`
 
 var typeOfKeyboard = "";
 
-function embaralhar(){
-    shuffleKeys();
-    var valor = Math.random()*100;
-    if(valor>60){
-        typeOfKeyboard = databaseKeyboardBraile;
-    }else if(valor<30){
-        typeOfKeyboard = databaseKeyboardSemaforico;
-    }else{
-        typeOfKeyboard = databaseKeyboardNormal;
+function randonKeys() {
+    shuffleKeys(userRandonKeys);
+    switch (userKeyboardData) {
+        case "databaseKeyboardBraile":
+            typeOfKeyboard = databaseKeyboardBraile;
+            break;
+        case "databaseKeyboardSemaforico":
+            typeOfKeyboard = databaseKeyboardSemaforico;
+            break;
+        case "databaseKeyboardNormal":
+            typeOfKeyboard = databaseKeyboardNormal;
+            break;
+        default:
+            typeOfKeyboard = databaseKeyboardNormal;
+            break;
     }
     renderKeys();
+    console.log(userKeyboardData)
+    console.log(userRandonKeys)
 }
 
 
@@ -30,10 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Verifica se o conteúdo do botão é uma imagem
             const isImage = button.querySelector("img");
-            
+
             if (content == "-") {
                 inputField.value = inputField.value.slice(0, -1);
-            } else if(content == "+"){
+            } else if (content == "+") {
                 //execução de envio da mensagem
             } else {
                 inputField.value += content;
@@ -87,7 +95,7 @@ function renderKeys() {
         "+": "37.png",
         "-": "38.png"
     };
-    
+
 
     keyboardButtons.forEach((button) => {
         const letter = button.value;
@@ -105,7 +113,7 @@ function renderKeys() {
 }
 
 // Função para embaralhar todas as teclas, mantendo os números na mesma linha
-function shuffleKeys() {
+function shuffleKeys(value) {
     const keyboard = document.querySelector('.keyboard-row');
     const numberRow = document.querySelector('.number-row');
     const allButtons = Array.from(keyboard.querySelectorAll('.key'));
@@ -118,17 +126,18 @@ function shuffleKeys() {
         allButtons.splice(index, 1);
     }
 
-    // Função de embaralhamento Fisher-Yates
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+    if (value) {
+        // Função de embaralhamento Fisher-Yates
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
+        // Embaralhe todas as teclas
+        shuffleArray(allButtonsNumbers);
+        shuffleArray(allButtons);
     }
-
-    // Embaralhe todas as teclas
-    shuffleArray(allButtonsNumbers);
-    shuffleArray(allButtons);
 
     // Limpa o teclado
     keyboard.innerHTML = '';
@@ -146,7 +155,4 @@ function shuffleKeys() {
     // Adicione a tecla "Backspace" de volta ao teclado
     //keyboard.appendChild(backspaceButton);
 }
-
-// Chame a função para embaralhar os botões quando a página carregar
-window.addEventListener('load', embaralhar);
 

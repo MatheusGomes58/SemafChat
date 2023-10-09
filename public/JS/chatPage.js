@@ -2,7 +2,7 @@
 const messageInput = document.getElementById("insertMessenger");
 const chatMessages = document.querySelector(".chat-messages");
 // Referência para o nó "mensagens" no Realtime Database
-const messagesRef = firebase.database().ref('mensagens');
+const messagesRef = firebase.database().ref(userChat);
 const now = new Date();
 
 

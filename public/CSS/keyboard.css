@@ -21,6 +21,7 @@ body {
     text-align: center;
     max-height: 300px;
     overflow-y: scroll;
+    overflow: auto;
 }
 
 .keyboard-row {
@@ -81,7 +82,7 @@ body {
 }
 
 .key.number:hover {
-    background-color: #5593ffb2
+    background-color: #035efb97
 }
 
 .key:hover{

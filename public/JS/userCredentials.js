@@ -3,6 +3,9 @@ let currentUser = {}
 let email = "";
 let password = "";
 let userData = "";
+let userKeyboardData = "";
+let userRandonKeys = "";
+let userChat = "mensagens";
 
 function login() {
   if (firebase.auth().currentUser) {
@@ -91,10 +94,12 @@ async function getUserInfo() {
     profile = true
     const usersData = logUsers.docs[0]
     userData = usersData.data().customerName
-    console.log(usersData.data().customerName)
-  }
-  if(document.title == "Bate-Papo | DesbravaChat"){
-    exibirMensagens()
+    if(document.title == "Bate-Papo | DesbravaChat"){
+      exibirMensagens()
+      userKeyboardData = usersData.data().typeOfKeyboard
+      userRandonKeys = usersData.data().userRandonKeys
+      randonKeys()
+    }
   }
 }
 

@@ -34,9 +34,9 @@ body {
 
 .chat-messages {
     padding: 10px;
-    max-height: 200px;
-    height: 150px;
+    max-height: 150px;
     overflow-y: scroll;
+    overflow: auto;
 }
 
 .message {

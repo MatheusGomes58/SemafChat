@@ -4,17 +4,18 @@
     border-radius: 10px; /* Cantos arredondados */
     clear: both;
     overflow: hidden;
+    min-width: 100px;
 }
 
 .you {
-    background-color: #3498db;
+    background-color: orange;
     color: #fff;
     align-self: flex-start;
     float: left; /* Alinha à esquerda */
 }
 
 .me {
-    background-color: #e74c3c;
+    background-color: #25D366;
     color: #fff;
     align-self: flex-end;
     float: right; /* Alinha à direita */
@@ -32,5 +33,7 @@
 }
 
 .timestamp {
-    color: #000000;
+    color: #323232;
+    align-self: flex-end;
+    float: right; /* Alinha à direita */
 }

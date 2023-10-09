@@ -9,19 +9,21 @@ function createMenssager(text, user, hour) {
         const username = document.createElement('span');
         username.className = 'username';
         username.textContent = 'Você:';
-        const timestamp = document.createElement('span');
-        timestamp.className = 'timestamp';
-        timestamp.textContent = hour;
 
         const messageTextElement = document.createElement('div');
         messageTextElement.className = 'message-text';
         messageTextElement.textContent = text;
+
+        
+        const timestamp = document.createElement('div');
+        timestamp.className = 'timestamp';
+        timestamp.textContent = hour;
     
         messageInfo.appendChild(username);
-        messageInfo.appendChild(timestamp);
     
         chatBubble.appendChild(messageInfo);
         chatBubble.appendChild(messageTextElement);
+        chatBubble.appendChild(timestamp);
     
         chatContainer.appendChild(chatBubble);
     }else{
@@ -34,19 +36,20 @@ function createMenssager(text, user, hour) {
         const username = document.createElement('span');
         username.className = 'username';
         username.textContent = user;
-        const timestamp = document.createElement('span');
-        timestamp.className = 'timestamp';
-        timestamp.textContent = hour;
 
         const messageTextElement = document.createElement('div');
         messageTextElement.className = 'message-text';
         messageTextElement.textContent = text;
+        
+        const timestamp = document.createElement('div');
+        timestamp.className = 'timestamp';
+        timestamp.textContent = hour;
     
         messageInfo.appendChild(username);
-        messageInfo.appendChild(timestamp);
     
         chatBubble.appendChild(messageInfo);
         chatBubble.appendChild(messageTextElement);
+        chatBubble.appendChild(timestamp);
     
         chatContainer.appendChild(chatBubble);
     }
