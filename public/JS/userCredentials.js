@@ -5,7 +5,7 @@ let password = "";
 let userData = "";
 let userKeyboardData = "";
 let userRandonKeys = "";
-let userChat = "mensagens";
+let userChat = "";
 
 function login() {
   if (firebase.auth().currentUser) {
@@ -26,7 +26,7 @@ function login() {
         })
         .then(() => {
           setTimeout(() => {
-            window.location.replace("./chatPage.html")
+            window.location.replace("./homePage.html")
           }, 1000)
         })
     })
@@ -99,6 +99,8 @@ async function getUserInfo() {
       userKeyboardData = usersData.data().typeOfKeyboard
       userRandonKeys = usersData.data().userRandonKeys
       randonKeys()
+    }else if (document.title == "Tela Inicial | DesbravaChat"){
+      searchChats();
     }
   }
 }

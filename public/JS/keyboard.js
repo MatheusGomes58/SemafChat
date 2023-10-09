@@ -1,6 +1,48 @@
 const databaseKeyboardBraile = `./IMG/DatabaseOfKeyboard/braile/`
 const databaseKeyboardSemaforico = `./IMG/DatabaseOfKeyboard/semaforico/`
 const databaseKeyboardNormal = `./IMG/DatabaseOfKeyboard/normal/`
+// Mapeia letras para nomes de imagens correspondentes
+const letterToImage = {
+    "A": "1.png",
+    "B": "2.png",
+    "C": "3.png",
+    "D": "4.png",
+    "E": "5.png",
+    "F": "6.png",
+    "G": "7.png",
+    "H": "8.png",
+    "I": "9.png",
+    "J": "10.png",
+    "K": "11.png",
+    "L": "12.png",
+    "M": "13.png",
+    "N": "14.png",
+    "O": "15.png",
+    "P": "16.png",
+    "Q": "17.png",
+    "R": "18.png",
+    "S": "19.png",
+    "T": "20.png",
+    "U": "21.png",
+    "V": "22.png",
+    "W": "23.png",
+    "X": "24.png",
+    "Y": "25.png",
+    "Z": "26.png",
+    "1": "27.png",
+    "2": "28.png",
+    "3": "29.png",
+    "4": "30.png",
+    "5": "31.png",
+    "6": "32.png",
+    "7": "33.png",
+    "8": "34.png",
+    "9": "35.png",
+    "0": "36.png",
+    "+": "37.png",
+    "-": "38.png"
+};
+
 
 //setInterval(embaralhar, 5000);
 
@@ -54,49 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
 function renderKeys() {
     const keyboardButtons = document.querySelectorAll(".key");
 
-    // Mapeia letras para nomes de imagens correspondentes
-    const letterToImage = {
-        "A": "1.png",
-        "B": "2.png",
-        "C": "3.png",
-        "D": "4.png",
-        "E": "5.png",
-        "F": "6.png",
-        "G": "7.png",
-        "H": "8.png",
-        "I": "9.png",
-        "J": "10.png",
-        "K": "11.png",
-        "L": "12.png",
-        "M": "13.png",
-        "N": "14.png",
-        "O": "15.png",
-        "P": "16.png",
-        "Q": "17.png",
-        "R": "18.png",
-        "S": "19.png",
-        "T": "20.png",
-        "U": "21.png",
-        "V": "22.png",
-        "W": "23.png",
-        "X": "24.png",
-        "Y": "25.png",
-        "Z": "26.png",
-        "1": "27.png",
-        "2": "28.png",
-        "3": "29.png",
-        "4": "30.png",
-        "5": "31.png",
-        "6": "32.png",
-        "7": "33.png",
-        "8": "34.png",
-        "9": "35.png",
-        "0": "36.png",
-        "+": "37.png",
-        "-": "38.png"
-    };
-
-
     keyboardButtons.forEach((button) => {
         const letter = button.value;
         if (letterToImage.hasOwnProperty(letter)) {
@@ -122,6 +121,12 @@ function shuffleKeys(value) {
     // Exclui a tecla "Backspace" para não ser embaralhada
     const backspaceButton = keyboard.querySelector('.key.backspace');
     const index = allButtons.indexOf(backspaceButton);
+    if (index !== -1) {
+        allButtons.splice(index, 1);
+    }
+
+    // Exclui a tecla "space" para não ser embaralhada
+    const spaceButton = keyboard.querySelector('.key.space');
     if (index !== -1) {
         allButtons.splice(index, 1);
     }

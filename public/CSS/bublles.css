@@ -8,14 +8,14 @@
 }
 
 .you {
-    background-color: orange;
+    background-color: #25D366;
     color: #fff;
     align-self: flex-start;
     float: left; /* Alinha à esquerda */
 }
 
 .me {
-    background-color: #25D366;
+    background-color: orange;
     color: #fff;
     align-self: flex-end;
     float: right; /* Alinha à direita */

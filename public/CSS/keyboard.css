@@ -72,6 +72,16 @@ body {
     background-color: #a83939;
 }
 
+.key.space {
+    grid-column: span 2;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+
 .key.number {
     grid-column: span 2;
     background-color: #8ab5ffe8;
@@ -97,3 +107,21 @@ body {
 .keyboard-container {
     text-align: center;
 }
+
+.math button {
+    display: inline-block; /* ou inline-flex */
+    margin-right: 10px; /* Espaço entre os botões, se necessário */
+    vertical-align: middle;
+}
+
+.sizeOfImage {
+    width: 40px; /* Ajuste o tamanho da imagem em relação à largura da tecla */
+    height: 40px; /* Ajuste a altura da imagem em relação à altura da tecla */
+    max-width: 100%; /* Evite que a imagem se estique além da largura da tecla */
+    max-height: 100%; /* Evite que a imagem se estique além da altura da tecla */
+}
+
+.sizeOfImage.number {
+    background-color:  #035efb97;
+}
+
