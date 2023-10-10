@@ -29,10 +29,10 @@ function createMenssager(text, user, hour) {
             imageElement.classList.add('sizeOfImage');
 
             // Verificar se o caractere é numérico
-            if (!isNaN(character)) {
+            if (!isNaN(character) && character.trim() !== "") {
                 // Adicione uma classe CSS diferente para caracteres numéricos
                 imageElement.classList.add('number');
-            }
+            }            
 
             messageTextElement.appendChild(imageElement);
         }

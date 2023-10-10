@@ -9,7 +9,7 @@ function enviarMensagem() {
     const messagesRef = firebase.database().ref("mensagens/" + userChat);
     
     const mensagem = messageInput.value;
-    var timeOfMessenger = "" + now.getHours() + ":" + now.getMinutes()
+    var timeOfMessenger = "" + now.getHours().toString()  + ":" + (now.getMinutes() < 10? "0" + now.getMinutes().toString() : now.getMinutes().toString());
 
     if (mensagem !== '') {
         // Crie um objeto com a mensagem e a data atual
@@ -27,21 +27,10 @@ function enviarMensagem() {
         const mensagemID = mensagemRef.key;
 
         // Atualize o Firestore com o ID da última mensagem enviada
-        const query = db.collection('chats').where("chat", "==", userChat);
-
-        query.get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const chatID = doc.id;
-                    const chatRef = db.collection('chats').doc(chatID); // Substitua 'seu_chat_id' pelo ID do seu chat
-                    chatRef.update({
-                        lastMensagem: mensagemID
-                    });
-                });
-            })
-            .catch((error) => {
-                console.error("Erro ao consultar o Firestore: ", error);
-            });
+        const query = db.collection('chats').doc(userChat);
+        query.update({
+            lastMensagem: mensagemID
+        });
         // Limpe o campo de mensagem
         messageInput.value = '';
     }

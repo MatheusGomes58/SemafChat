@@ -1,6 +1,8 @@
 const databaseKeyboardBraile = `./IMG/DatabaseOfKeyboard/braile/`
-const databaseKeyboardSemaforico = `./IMG/DatabaseOfKeyboard/semaforico/`
+const databaseKeyboardLibras = `./IMG/DatabaseOfKeyboard/libras/`
+const databaseKeyboardMorse = `./IMG/DatabaseOfKeyboard/morse/`
 const databaseKeyboardNormal = `./IMG/DatabaseOfKeyboard/normal/`
+const databaseKeyboardSemaforico = `./IMG/DatabaseOfKeyboard/semaforico/`
 // Mapeia letras para nomes de imagens correspondentes
 const letterToImage = {
     "A": "1.png",
@@ -40,7 +42,8 @@ const letterToImage = {
     "9": "35.png",
     "0": "36.png",
     "+": "37.png",
-    "-": "38.png"
+    "-": "38.png",
+    " ": "39.png"
 };
 
 

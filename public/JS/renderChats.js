@@ -1,9 +1,7 @@
 // Função para renderizar chats
 function renderChats(chats) {
     const chatList = document.getElementById("chatList");
-
-    // Limpar a lista de chats existente
-    document.getElementById("chatList").innerHTML = '';
+    chatList.innerHTML = "";
 
     chats.forEach((chat) => {
         const chatItem = document.createElement("li");
@@ -12,10 +10,11 @@ function renderChats(chats) {
         // Adicionar evento de clique ao chatItem
         chatItem.addEventListener("click", () => {
             // Capturar o nome do chat após o clique
-            userChat = chat.name;
+            userChat = chat.uid;
 
+            console.log(chat.uid)
             // Salvar o nome do chat no localStorage
-            localStorage.setItem("userChat", userChat);
+            localStorage.setItem("userChat", chat.uid);
 
             // Redirecionar para a página "chatPage.html"
             window.location.href = "chatPage.html";
@@ -27,11 +26,24 @@ function renderChats(chats) {
         chatItem.addEventListener("mousedown", () => {
             longPressTimer = setTimeout(() => {
                 openUpdateChatModal(chat.name)
-            }, 1000); 
+            }, 3000);
         });
+
 
         // Cancelar o timer de long press se o usuário soltar o mouse antes de 4 segundos
         chatItem.addEventListener("mouseup", () => {
+            clearTimeout(longPressTimer);
+        });
+
+        // Adicionar evento de pressionar e segurar (long press) ao chatItem em dispositivos móveis
+        chatItem.addEventListener("touchstart", (e) => {
+            longPressTimer = setTimeout(() => {
+                openUpdateChatModal(chat.name);
+            }, 3000);
+        });
+
+        // Limpar o temporizador se o toque for liberado antes do long press
+        chatItem.addEventListener("touchend", () => {
             clearTimeout(longPressTimer);
         });
 
@@ -51,7 +63,7 @@ function renderChats(chats) {
                     imageElement.classList.add('sizeOfImage');
 
                     // Verificar se o caractere é numérico
-                    if (!isNaN(character)) {
+                    if (!isNaN(character) && character.trim() !== "") {
                         // Adicione uma classe CSS diferente para caracteres numéricos
                         imageElement.classList.add('number');
                     }

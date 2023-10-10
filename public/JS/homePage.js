@@ -2,14 +2,16 @@ const chatsCollection = firebase.firestore().collection("chats");
 const messagesRef = firebase.database();
 
 function searchChats() {
-  const chatList = document.getElementById("chatList"); // Substitua pelo ID do elemento onde você deseja renderizar a lista de chats
+  while (chatsData.length) {
+    chatsData.pop();
+  }
   chatsCollection
     .where("user", "array-contains", email)
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         const chatData = doc.data();
-        findUltimateMessanger(chatData.chat,chatData.lastMensagem)
+        findUltimateMessanger(chatData.chat, doc.id, chatData.lastMensagem)
       });
     })
     .catch((error) => {
@@ -18,40 +20,45 @@ function searchChats() {
 
 }
 
-function findUltimateMessanger(chat, lastMessageID) {
+function findUltimateMessanger(chat, chatId, lastMessageID) {
   if (!lastMessageID) {
     console.error("ID da última mensagem não fornecido.");
     chatsData.push({
       name: chat,
-    });  
+      uid: chatId
+    });
     renderChats(chatsData);
     return;
-  }
-
-  const chatMessagesRef = firebase.database().ref("mensagens/" + chat);
-
-  chatMessagesRef
-    .orderByKey()
-    .equalTo(lastMessageID)
-    .once('value')
-    .then((snapshot) => {
-      snapshot.forEach((childSnapshot) => {
-        const mensagem = childSnapshot.val();
+  } else {
+    const chatMessagesRef = firebase.database().ref("mensagens/" + chatId);
+    chatMessagesRef
+      .orderByKey()
+      .equalTo(lastMessageID)
+      .once('value')
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          snapshot.forEach((childSnapshot) => {
+            const mensagem = childSnapshot.val();
+            chatsData.push({
+              name: chat,
+              uid: chatId,
+              lastMessage: mensagem.mensagem,
+              lastMessageTime: mensagem.timestamp
+            });
+          });
+        }
+        renderChats(chatsData);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar a última mensagem:", error);
         chatsData.push({
           name: chat,
-          lastMessage: mensagem.mensagem,
-          lastMessageTime: mensagem.timestamp
+          uid: chatId
         });
         renderChats(chatsData);
       });
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar a última mensagem:", error);
-      chatsData.push({
-        name: chat,
-      });
-      renderChats(chatsData);
-    });
+
+  }
 }
 
 
@@ -74,7 +81,29 @@ createChatButton.addEventListener("click", openCreateChatModal);
 const searchButton = document.getElementById("searchButton");
 searchButton.addEventListener("click", searchUsers);
 
+// Adiciona um evento de clique ao botão "Criar editar usuário"
+const updateUserModalButton = document.getElementById("settingsButton");
+updateUserModalButton.addEventListener("click", openUpdateUserModal);
+
 
 // Exemplo de array de chats
 const chatsData = [];
+
+
+// Captura todos os links dentro do menu
+const menuLinks = document.querySelectorAll('nav ul li a');
+
+// Adiciona um ouvinte de evento de clique a cada link
+menuLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    // Remove a classe "active" de todos os links
+    menuLinks.forEach((menuLink) => {
+      menuLink.classList.remove('active');
+    });
+
+    // Adiciona a classe "active" ao link clicado
+    event.target.classList.add('active');
+  });
+});
+
 

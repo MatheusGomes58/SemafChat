@@ -3,6 +3,21 @@ function openCreateChatModal() {
     modal.style.display = "block";
 }
 
+function openUpdateUserModal() {
+    const modal = document.getElementById("updateUserModal");
+    modal.style.display = "block";
+    document.getElementById("chatEmailUpdate").value = email
+    document.getElementById("userNameUpdate").value = userData
+    if (userKeyboardData) {
+        document.getElementById("userKeyboard").value = userKeyboardData
+    } else {
+        document.getElementById("userKeyboard").value = "databaseKeyboardNormal"
+    }
+    if (userRandonKeys) {
+        document.getElementById("trueRandonKeys").checked = userRandonKeys
+    }
+}
+
 function openUpdateChatModal(chatName) {
     const modal = document.getElementById("updateChatModal");
     const chatNameInput = document.getElementById("chatNameUpdate");
@@ -14,12 +29,17 @@ function openUpdateChatModal(chatName) {
             chatNameInput.value = chatData.chat;
 
             for (const member of chatData.user) {
+
                 const userFieldsDiv = document.getElementById("userFieldsUpdate");
                 const newUserField = document.createElement("input");
                 newUserField.type = "text";
                 newUserField.placeholder = "Email do usuário";
                 newUserField.name = "user";
                 newUserField.value = member;
+                if (member == email) {
+                    newUserField.hidden = true;
+                    newUserField.readOnly = true;
+                }
                 userFieldsDiv.appendChild(newUserField);
             }
 
@@ -39,6 +59,11 @@ function closeCreateChatModal() {
 
 function closeUpdateChatModal() {
     const modal = document.getElementById("updateChatModal");
+    modal.style.display = "none";
+}
+
+function closeUpdateUserModal() {
+    const modal = document.getElementById("updateUserModal");
     modal.style.display = "none";
 }
 
@@ -69,7 +94,7 @@ function createChat() {
     // Supondo que você tenha uma variável 'chatName' para o nome do chat
     // e uma variável 'users' para a lista de usuários
 
-    if (!chatName.trim() || !users.some(user => user !== email.trim())) {
+    if (!chatName.trim() || !users.some(user => user.trim() !== "" && user !== email.trim())) {
         alert("Por favor, preencha o nome do chat e insira pelo menos um usuário diferente do seu próprio email.");
         return;
     }
@@ -94,6 +119,11 @@ function updateChatUsers() {
     const chatName = document.getElementById("chatNameUpdate").value;
     const userInputs = document.querySelectorAll("#userFieldsUpdate input[name='user']");
     const users = Array.from(userInputs).map(input => input.value.trim().toLowerCase());
+
+    if (!chatName.trim() || !users.some(user => user.trim() !== "" && user !== email.trim())) {
+        alert("Por favor, insira pelo menos um usuário diferente do seu próprio email e que não seja vazio.");
+        return;
+    }
 
     // Primeiro, você precisa buscar o chat com base no chatName
     db.collection("chats").where("chat", "==", chatName)
@@ -122,15 +152,14 @@ function updateChatUsers() {
 function deleteChat() {
     const chatName = document.getElementById("chatNameUpdate").value;
 
+    // Verifique com o usuário se ele realmente deseja sair do chat
+    const confirmRemove = window.confirm(`Tem certeza de que deseja sair do chat "${chatName}"?`);
 
-    // Verifique com o usuário se ele realmente deseja deletar o chat
-    const confirmDelete = window.confirm(`Tem certeza de que deseja excluir o chat "${chatName}"?`);
-
-    if (!confirmDelete) {
-        return; // O usuário cancelou a exclusão, saia da função
+    if (!confirmRemove) {
+        return; // O usuário cancelou a remoção, saia da função
     }
 
-    // Continue com a exclusão do chat
+    // Continue com a remoção do usuário do chat
     db.collection("chats").where("chat", "==", chatName)
         .get()
         .then(querySnapshot => {
@@ -138,8 +167,24 @@ function deleteChat() {
                 // Vamos assumir que só há um chat correspondente, então pegamos o primeiro
                 const chatDoc = querySnapshot.docs[0];
 
-                // Excluímos o documento do chat
-                return chatDoc.ref.delete();
+                // Verifique se a propriedade "users" existe no documento do chat
+                if (chatDoc.exists && chatDoc.data().user) {
+                    // Atualize o array de usuários do chat para remover o email
+                    const users = chatDoc.data().user;
+                    const updatedUsers = users.filter(user => user !== email);
+
+                    if (updatedUsers.length === 1) {
+                        // Se houver apenas um usuário, atualize para uma lista vazia
+                        return chatDoc.ref.update({ user: [] });
+                    }
+                    else {
+                        // Caso contrário, atualize para a lista filtrada
+                        return chatDoc.ref.update({user : updatedUsers});
+                    }
+                }
+                else {
+                    throw new Error("Estrutura de dados do chat inválida ou propriedade 'user' não encontrada");
+                }
             } else {
                 throw new Error("Chat não encontrado no Firestore");
             }
@@ -149,8 +194,9 @@ function deleteChat() {
             searchChats();
         })
         .catch(error => {
-            console.error("Erro ao excluir chat:", error);
+            console.error("Erro ao remover usuário do chat:", error);
         });
+
 }
 
 
@@ -171,5 +217,22 @@ function getChatData(chatName) {
             console.error("Erro ao buscar dados do chat:", error);
         });
 }
+
+var trueRadio = document.getElementById("trueRandonKeys");
+var falseRadio = document.getElementById("falseRandonKeys");
+
+// Adiciona um evento de mudança (change) ao rádio "Sim"
+trueRadio.addEventListener("change", function () {
+    // Se "Sim" for selecionado, desabilite o rádio "Não"
+    falseRadio.checked = false;
+});
+
+// Adiciona um evento de mudança (change) ao rádio "Não"
+falseRadio.addEventListener("change", function () {
+    // Se "Não" for selecionado, desabilite o rádio "Sim"
+    trueRadio.checked = false;
+});
+
+
 
 

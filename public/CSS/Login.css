@@ -10,7 +10,6 @@ body {
   justify-content: center;
   font-family: Arial, sans-serif;
   vertical-align: middle;
-  text-align: center;
 }
 
 .container {
@@ -45,12 +44,12 @@ body {
 #login-box input[type="password"] {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
   border: none;
   border-radius: 3px;
   box-sizing: border-box;
   font-size: 16px;
   background-color: #D9D9D9;
+  flex: 1;
 }
 
 #login-box input[type="submit"] {
@@ -81,7 +80,39 @@ a.link {
 }
 
 .img-container {
+  padding: 10px;
+  max-height: 210px;
+  height: 100%;
+  overflow-y: scroll;
+  overflow: auto;
   text-align: center;
   display: block;
   margin-bottom: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.form-container select,
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #D9D9D9;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.form-row {
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+    align-items: center;
+    text-align: center;
 }

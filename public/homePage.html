@@ -2,6 +2,8 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tela Inicial | DesbravaChat</title>
   <link href="./CSS/homePage.css" rel="stylesheet">
   <link rel="stylesheet" href="./CSS/homePage.css">
@@ -21,22 +23,20 @@
     </header>
     <nav>
       <ul>
-        <li><a href="#chats">Chats</a></li>
+        <li><a href="#chats" class="active">Conversas</a></li>
         <li><a href="#updates">Atualizações</a></li>
-        <li><a href="#minigames">Mini Games</a></li>
+        <li><a href="#minigames">Jogos</a></li>
       </ul>
-    </nav>
-    <main>
+    </nav>    
+
+    <main class="sections">
       <section id="chats">
-        <h2>Chats</h2>
-        <ul id="chatList" class="whatsapp-chat-list">
-        </ul>
+        <p id="chatList" class="whatsapp-chat-list">
+        </p>
       </section>
       <section id="updates">
-        <h2>Atualizações</h2>
       </section>
       <section id="minigames">
-        <h2>Mini Games</h2>
       </section>
     </main>
 
@@ -62,7 +62,7 @@
 
     <div class="modal" id="updateChatModal">
       <div class="modal-content">
-        <h2>Editar Chat</h2>
+        <h2>Editar Membros do Chat</h2>
         <form class="modal-form">
           <label for="chatName">Nome do Chat:</label>
           <input type="text" id="chatNameUpdate" placeholder="Chat" readonly>
@@ -79,7 +79,40 @@
       </div>
     </div>
 
-
+    <div class="modal" id="updateUserModal">
+      <div class="modal-content">
+        <h2>Editar dados do Usuário</h2>
+        <form class="modal-form">
+          <label for="userEmail">E-mail do Usuário:</label>
+          <input type="text" id="chatEmailUpdate" placeholder="Email" readonly>
+          <label for="userName">Nome do Usuário:</label>
+          <input type="text" id="userNameUpdate" placeholder="Usuário">
+          <label for="userKeyboard">Teclado do Usuário:</label>
+          <select id="userKeyboard" placeholder="Usuário">
+            <option value="databaseKeyboardBraile">Braile</option>
+            <option value="databaseKeyboardLibras">Libras</option>
+            <option value="databaseKeyboardMorse">Morse</option>
+            <option value="databaseKeyboardNormal">Normal</option>
+            <option value="databaseKeyboardSemaforico">Semafórico</option>
+          </select>
+          <label for="userKeyboard">Deseja embaralhar teclas?</label>
+          <div class="modal-row">
+            <label>
+              <input type="radio" name="opcao" value="verdadeiro" id="trueRandonKeys"> Sim
+            </label>
+            <label>
+              <input type="radio" name="opcao" value="falso" id="falseRandonKeys" checked> Não
+            </label>
+          </div>
+          <div class="modal-row">
+            <button type="button" onclick="updateUser()">Editar</button>
+            <button type="button" onclick="deleteChat()">Deletar</button>
+            <button type="button" onclick="logout()">Sair</button>
+            <button type="button" onclick="closeUpdateUserModal()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>

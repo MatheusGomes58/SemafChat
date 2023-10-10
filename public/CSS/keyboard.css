@@ -1,10 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
-
 .keyboard-container {
     max-width: 500px;
     margin: 0 auto;
@@ -115,13 +108,17 @@ body {
 }
 
 .sizeOfImage {
-    width: 40px; /* Ajuste o tamanho da imagem em relação à largura da tecla */
-    height: 40px; /* Ajuste a altura da imagem em relação à altura da tecla */
-    max-width: 100%; /* Evite que a imagem se estique além da largura da tecla */
-    max-height: 100%; /* Evite que a imagem se estique além da altura da tecla */
+    width: 7%;
+    max-width: 100px; /* Tamanho máximo em pixels */
+    height: auto; /* Mantém a proporção original */
+    display: inline-block;
+    border-radius: 10%;
+    flex-shrink: 1;
+    position: relative;
 }
 
+
 .sizeOfImage.number {
-    background-color:  #035efb97;
+    background-color:  #8ab5ffe8;
 }
 

@@ -1,27 +1,45 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Login | DesbravaChat</title>
-    <link rel="stylesheet" type="text/css" href="./CSS/login.css">
-    <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <link rel="icon" type="image/png" href="./IMG/LOGUINHOAMP.png"/>
-  </head>
-  <body class="container">
-    <div id="login-box">
-      <div class="img-container"> 
-        <img src="./IMG/LOGO.png" height="200px">
-      </div>
-      <input type="email" id="email" name="email" placeholder="Email:" required>
-      <input type="password" id="password" name="password" placeholder="Senha:" required>
-      <p><input type="submit" value="Entrar" onclick="login()"> <a href="./recover.html" class="link">esqueci a senha<a></a></p>  
-      <p>Não tem acesso? <a href="./register.html" class="link">o que fazer?<a></p>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | DesbravaChat</title>
+  <link rel="stylesheet" type="text/css" href="./CSS/login.css">
+  <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <link rel="icon" type="image/png" href="./IMG/LOGUINHOAMP.png" />
+  <link rel="stylesheet" href="./CSS/chatPage.css">
+  <link rel="stylesheet" href="./CSS/keyboard.css">
+  <link rel="stylesheet" href="./CSS/bublles.css">
+</head>
+
+<body class="container">
+  <div id="login-box">
+    <div class="img-container">
+      <img src="./IMG/LOGO.png" height="200px">
     </div>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
-    <script src="./JS/authFirebase.js"></script>
-    <script src="./JS/userCredentials.js"></script>
-  </body>
+    <div class="form-container">
+      <div class="form-row">
+        <input type="email" id="email" name="email" placeholder="Email:" required>
+      </div>
+      <div class="form-row">
+        <input type="password" id="password" name="password" placeholder="Senha:" required>
+      </div>
+      <div class="form-row">
+        <p><input type="submit" value="Entrar" onclick="login()" class="key"> 
+          <a href="./recover.html" class="link">esqueci a senha<a></a></p>
+      </div>
+      <div class="form-row">
+        <p>Não tem acesso? <a href="./register.html" class="link">o que fazer?<a></p>
+      </div>
+    </div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+  <script src="./JS/authFirebase.js"></script>
+  <script src="./JS/userCredentials.js"></script>
+</body>
+
 </html>
