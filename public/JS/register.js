@@ -24,7 +24,7 @@ async function readUsers() {
 
 function UserPassword() {
   customerName = document.getElementById("namec").value
-  customerEmail = document.getElementById("emailc").value
+  customerEmail = document.getElementById("emailc").value.toLowerCase()
   CustomerPassword = document.getElementById("passwordc").value
 
   if (customerEmail !== "") {

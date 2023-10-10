@@ -1,18 +1,19 @@
 let currentUser = {}
-  
+
 let email = "";
 let password = "";
 let userData = "";
 let userKeyboardData = "";
 let userRandonKeys = "";
 let userChat = "";
+var typeOfKeyboard = "";
 
 function login() {
   if (firebase.auth().currentUser) {
     firebase.auth().signOut()
   }
 
-  email = document.getElementById("email").value
+  email = document.getElementById("email").value.toLowerCase()
   password = document.getElementById("password").value
 
   firebase
@@ -66,11 +67,11 @@ function logout() {
 }
 
 function getUser() {
-  if(document.title != "Login | DesbravaChat"){
+  if (document.title != "Login | DesbravaChat") {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         currentUser.uid = user.uid
-        if(email != null){email = user.email}
+        if (email != null) { email = user.email }
         getUserInfo()
       } else {
         swal
@@ -78,11 +79,11 @@ function getUser() {
             icon: "success",
             title: "Redirecionando para a tela de autenticação",
           })
-        .then(() => {
-          setTimeout(() => {
-            window.location.replace("./index.html")
-          }, 1000)
-        })
+          .then(() => {
+            setTimeout(() => {
+              window.location.replace("./index.html")
+            }, 1000)
+          })
       }
     })
   }
@@ -94,12 +95,26 @@ async function getUserInfo() {
     profile = true
     const usersData = logUsers.docs[0]
     userData = usersData.data().customerName
-    if(document.title == "Bate-Papo | DesbravaChat"){
+    userKeyboardData = usersData.data().typeOfKeyboard
+    userRandonKeys = usersData.data().userRandonKeys
+    switch (userKeyboardData) {
+      case "databaseKeyboardBraile":
+        typeOfKeyboard = databaseKeyboardBraile;
+        break;
+      case "databaseKeyboardSemaforico":
+        typeOfKeyboard = databaseKeyboardSemaforico;
+        break;
+      case "databaseKeyboardNormal":
+        typeOfKeyboard = databaseKeyboardNormal;
+        break;
+      default:
+        typeOfKeyboard = databaseKeyboardNormal;
+        break;
+    }
+    if (document.title == "Bate-Papo | DesbravaChat") {
       exibirMensagens()
-      userKeyboardData = usersData.data().typeOfKeyboard
-      userRandonKeys = usersData.data().userRandonKeys
       randonKeys()
-    }else if (document.title == "Tela Inicial | DesbravaChat"){
+    } else if (document.title == "Tela Inicial | DesbravaChat") {
       searchChats();
     }
   }
@@ -108,8 +123,7 @@ async function getUserInfo() {
 window.onload = function () {
   getUser()
   console.log(document.title)
-  if(typeof titulo != "undefined")
-  {
+  if (typeof titulo != "undefined") {
     $('#config').hide();
     valida();
   }

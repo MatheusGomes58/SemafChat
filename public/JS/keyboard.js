@@ -44,52 +44,34 @@ const letterToImage = {
 };
 
 
-//setInterval(embaralhar, 5000);
-
-var typeOfKeyboard = "";
-
 function randonKeys() {
     shuffleKeys(userRandonKeys);
-    switch (userKeyboardData) {
-        case "databaseKeyboardBraile":
-            typeOfKeyboard = databaseKeyboardBraile;
-            break;
-        case "databaseKeyboardSemaforico":
-            typeOfKeyboard = databaseKeyboardSemaforico;
-            break;
-        case "databaseKeyboardNormal":
-            typeOfKeyboard = databaseKeyboardNormal;
-            break;
-        default:
-            typeOfKeyboard = databaseKeyboardNormal;
-            break;
-    }
     renderKeys();
-    console.log(userKeyboardData)
-    console.log(userRandonKeys)
 }
 
 
 //interpreta as teclas
 document.addEventListener("DOMContentLoaded", function () {
-    const inputField = document.getElementById("insertMessenger");
-    const keyboardButtons = document.querySelectorAll(".key");
-    keyboardButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-            const content = button.value;
+    if (document.title == "Bate-Papo | DesbravaChat") {
+        const inputField = document.getElementById("insertMessenger");
+        const keyboardButtons = document.querySelectorAll(".key");
+        keyboardButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                const content = button.value;
 
-            // Verifica se o conteúdo do botão é uma imagem
-            const isImage = button.querySelector("img");
+                // Verifica se o conteúdo do botão é uma imagem
+                const isImage = button.querySelector("img");
 
-            if (content == "-") {
-                inputField.value = inputField.value.slice(0, -1);
-            } else if (content == "+") {
-                //execução de envio da mensagem
-            } else {
-                inputField.value += content;
-            }
+                if (content == "-") {
+                    inputField.value = inputField.value.slice(0, -1);
+                } else if (content == "+") {
+                    //execução de envio da mensagem
+                } else {
+                    inputField.value += content;
+                }
+            });
         });
-    });
+    }
 });
 
 //renderiza as teclas

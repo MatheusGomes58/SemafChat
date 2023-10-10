@@ -3,12 +3,13 @@ function renderChats(chats) {
     const chatList = document.getElementById("chatList");
 
     // Limpar a lista de chats existente
-    chatList.innerHTML = '';
+    document.getElementById("chatList").innerHTML = '';
 
     chats.forEach((chat) => {
         const chatItem = document.createElement("li");
         chatItem.classList.add("chat-item");
 
+        // Adicionar evento de clique ao chatItem
         chatItem.addEventListener("click", () => {
             // Capturar o nome do chat após o clique
             userChat = chat.name;
@@ -16,13 +17,23 @@ function renderChats(chats) {
             // Salvar o nome do chat no localStorage
             localStorage.setItem("userChat", userChat);
 
-            // Adicionar um atraso de meio segundo (500ms) antes de executar a ação
-            setTimeout(() => {
-                // Redirecionar para a página "chatPage.html" após o atraso
-                window.location.href = "chatPage.html";
-            }, 1000); // 500 milissegundos (meio segundo)
+            // Redirecionar para a página "chatPage.html"
+            window.location.href = "chatPage.html";
         });
 
+        let longPressTimer;
+
+        // Adicionar evento de pressionar e segurar (long press) ao chatItem
+        chatItem.addEventListener("mousedown", () => {
+            longPressTimer = setTimeout(() => {
+                openUpdateChatModal(chat.name)
+            }, 1000); 
+        });
+
+        // Cancelar o timer de long press se o usuário soltar o mouse antes de 4 segundos
+        chatItem.addEventListener("mouseup", () => {
+            clearTimeout(longPressTimer);
+        });
 
         const chatDetails = document.createElement("div");
         chatDetails.classList.add("chat-details");
@@ -31,7 +42,24 @@ function renderChats(chats) {
         chatName.textContent = chat.name;
 
         const lastMessage = document.createElement("p");
-        lastMessage.textContent = chat.lastMessage;
+        if (chat.lastMessage) {
+            for (let i = 0; i < chat.lastMessage.length; i++) {
+                const character = chat.lastMessage[i];
+                if (letterToImage.hasOwnProperty(character)) {
+                    const imageElement = document.createElement('img');
+                    imageElement.src = typeOfKeyboard + letterToImage[character];
+                    imageElement.classList.add('sizeOfImage');
+
+                    // Verificar se o caractere é numérico
+                    if (!isNaN(character)) {
+                        // Adicione uma classe CSS diferente para caracteres numéricos
+                        imageElement.classList.add('number');
+                    }
+
+                    lastMessage.appendChild(imageElement);
+                }
+            }
+        }
 
         chatDetails.appendChild(chatName);
         chatDetails.appendChild(lastMessage);
@@ -51,3 +79,5 @@ function renderChats(chats) {
         chatList.appendChild(chatItem);
     });
 }
+
+

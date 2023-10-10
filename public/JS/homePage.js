@@ -1,19 +1,8 @@
 const chatsCollection = firebase.firestore().collection("chats");
 const messagesRef = firebase.database();
 
-// Função para criar um novo chat
-function createChat() {
-  chatsData.push({
-    name: prompt("Digite o nome do novo chat:"),
-    lastMessage: "Olá, como você está?",
-    lastMessageTime: "10:30 AM",
-  })
-  renderChats(chatsData);
-}
-
 function searchChats() {
   const chatList = document.getElementById("chatList"); // Substitua pelo ID do elemento onde você deseja renderizar a lista de chats
-
   chatsCollection
     .where("user", "array-contains", email)
     .get()
@@ -34,7 +23,7 @@ function findUltimateMessanger(chat, lastMessageID) {
     console.error("ID da última mensagem não fornecido.");
     chatsData.push({
       name: chat,
-    });
+    });  
     renderChats(chatsData);
     return;
   }
@@ -79,7 +68,7 @@ function searchUsers() {
 
 // Adiciona um evento de clique ao botão "Criar Novo Chat"
 const createChatButton = document.getElementById("createChatButton");
-createChatButton.addEventListener("click", createChat);
+createChatButton.addEventListener("click", openCreateChatModal);
 
 // Adiciona um evento de clique ao botão "Buscar"
 const searchButton = document.getElementById("searchButton");

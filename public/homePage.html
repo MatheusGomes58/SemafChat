@@ -6,6 +6,7 @@
   <link href="./CSS/homePage.css" rel="stylesheet">
   <link rel="stylesheet" href="./CSS/homePage.css">
   <link rel="stylesheet" href="./CSS/keyboard.css">
+  <link rel="stylesheet" href="./CSS/modal.css">
   <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <link rel="icon" type="image/png" href="./IMG/LOGUINHOAMP.png" />
 </head>
@@ -18,7 +19,6 @@
       <button id="settingsButton" class="key"><img src="./IMG/set.png"></button>
       <button id="createChatButton" class="key"><img src="./IMG/add.png"></button>
     </header>
-    <!-- ... (código anterior) ... -->
     <nav>
       <ul>
         <li><a href="#chats">Chats</a></li>
@@ -26,8 +26,6 @@
         <li><a href="#minigames">Mini Games</a></li>
       </ul>
     </nav>
-    <!-- ... (código anterior) ... -->
-
     <main>
       <section id="chats">
         <h2>Chats</h2>
@@ -41,6 +39,48 @@
         <h2>Mini Games</h2>
       </section>
     </main>
+
+
+    <div class="modal" id="createChatModal">
+      <div class="modal-content">
+        <h2>Criar Novo Chat</h2>
+        <form class="modal-form">
+          <label for="chatName">Nome do Chat:</label>
+          <input type="text" id="chatName" placeholder="Chat" required>
+          <label for="chatName">Lista de Membros:</label>
+          <div id="userFields">
+          </div>
+          <div class="modal-row">
+            <button type="button" onclick="addUserField()">Adicionar Usuário</button>
+            <button type="button" onclick="createChat()">Criar</button>
+            <button type="button" onclick="closeCreateChatModal()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div class="modal" id="updateChatModal">
+      <div class="modal-content">
+        <h2>Editar Chat</h2>
+        <form class="modal-form">
+          <label for="chatName">Nome do Chat:</label>
+          <input type="text" id="chatNameUpdate" placeholder="Chat" readonly>
+          <label for="chatName">Lista de Membros:</label>
+          <div id="userFieldsUpdate">
+          </div>
+          <div class="modal-row">
+            <button type="button" onclick="addUserUpdateField()">Adicionar Usuário</button>
+            <button type="button" onclick="updateChatUsers()">Editar</button>
+            <button type="button" onclick="deleteChat()">Deletar</button>
+            <button type="button" onclick="closeUpdateChatModal()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
@@ -48,8 +88,10 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
     <script src="./JS/authFirebase.js"></script>
     <script src="./JS/userCredentials.js"></script>
+    <script src="./JS/modal.js"></script>
     <script src="./JS/navigation.js"></script>
     <script src="./JS/renderChats.js"></script>
+    <script src="./JS/keyboard.js"></script>
     <script src="./JS/homePage.js"></script>
 </body>
 
