@@ -53,7 +53,6 @@ const letterToImage = {
 function randonKeys() {
     renderKeys();
     shuffleKeys(userRandonKeys);
-    displayWord();
 }
 
 //interpreta as teclas
@@ -181,10 +180,12 @@ function renderKeyboard(numbers, actions) {
                 </div>
             </div>
         `;
-        if(!numbers){
+        if (!numbers) {
             document.getElementById("number-row").innerHTML = ""
-        }if(!actions){
+        } if (!actions) {
             document.getElementById("actions").innerHTML = ""
+        } if (!actions && !numbers) {
+            displayWord();
         }
         randonKeys()
     } else {

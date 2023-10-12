@@ -99,7 +99,6 @@ function renderPosts(postList) {
 }
 
 postButton.addEventListener("click", () => {
-    renderKeyboard(true, true);
     const postsRef = firebase.database().ref("posts");
     const post = postInput.value;
     var timeOfMessenger = "" + now.getHours().toString() + ":" + (now.getMinutes() < 10 ? "0" + now.getMinutes().toString() : now.getMinutes().toString());

@@ -127,8 +127,9 @@ async function getUserInfo() {
     }
     if (document.title == "Bate-Papo | DesbravaChat") {
       exibirMensagens()
+    } if (document.title == "Advinhação de Palavras | DesbravaChat") {
+      renderKeyboard(false, false);
     }
-    renderKeyboard(false, false);
   }
 }
 
@@ -170,6 +171,7 @@ function updateUser() {
     .then(() => {
       closeUpdateUserModal()
       getUserInfo()
+      searchChats()
     })
     .catch((error) => {
       console.error("Erro ao atualizar os dados do usuário:", error);

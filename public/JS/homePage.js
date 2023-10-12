@@ -119,7 +119,7 @@ menuLinks.forEach((link) => {
     menuLinks.forEach((menuLink) => {
       menuLink.classList.remove('active');
     });
-
+    searchChats();
     // Adiciona a classe "active" ao link clicado
     event.target.classList.add('active');
   });

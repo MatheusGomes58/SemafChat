@@ -112,6 +112,7 @@ function createChat() {
         })
         .catch(function (error) {
             console.error("Erro ao criar chat: ", error);
+            searchChats();
         });
 }
 
@@ -146,7 +147,7 @@ function updateChatUsers() {
         })
         .catch(error => {
             console.error("Erro ao atualizar lista de usuários:", error);
-        });
+        }); searchChats();
 }
 
 function deleteChat() {
@@ -179,7 +180,7 @@ function deleteChat() {
                     }
                     else {
                         // Caso contrário, atualize para a lista filtrada
-                        return chatDoc.ref.update({user : updatedUsers});
+                        return chatDoc.ref.update({ user: updatedUsers });
                     }
                 }
                 else {
@@ -195,7 +196,7 @@ function deleteChat() {
         })
         .catch(error => {
             console.error("Erro ao remover usuário do chat:", error);
-        });
+        }); searchChats();
 
 }
 
