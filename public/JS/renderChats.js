@@ -11,9 +11,6 @@ function renderChats(chats) {
         chatItem.addEventListener("click", () => {
             // Capturar o nome do chat após o clique
             userChat = chat.uid;
-
-            console.log(chat.uid)
-            // Salvar o nome do chat no localStorage
             localStorage.setItem("userChat", chat.uid);
 
             // Redirecionar para a página "chatPage.html"
@@ -53,7 +50,7 @@ function renderChats(chats) {
         const chatName = document.createElement("h3");
         chatName.textContent = chat.name;
 
-        const lastMessage = document.createElement("p");
+        const lastMessage = document.createElement("div");
         if (chat.lastMessage) {
             for (let i = 0; i < chat.lastMessage.length; i++) {
                 const character = chat.lastMessage[i];
@@ -68,6 +65,7 @@ function renderChats(chats) {
                         imageElement.classList.add('number');
                     }
 
+                    lastMessage.classList.add('resizeMensager');
                     lastMessage.appendChild(imageElement);
                 }
             }
@@ -91,5 +89,6 @@ function renderChats(chats) {
         chatList.appendChild(chatItem);
     });
 }
+
 
 

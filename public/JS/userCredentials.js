@@ -76,6 +76,7 @@ function getUser() {
           email = user.email
           if (document.title == "Tela Inicial | DesbravaChat") {
             searchChats();
+            exibirPosts()
           }
         }
         getUserInfo()
@@ -126,14 +127,13 @@ async function getUserInfo() {
     }
     if (document.title == "Bate-Papo | DesbravaChat") {
       exibirMensagens()
-      randonKeys()
     }
+    renderKeyboard(false, false);
   }
 }
 
 window.onload = function () {
   getUser()
-  console.log(document.title)
   if (typeof titulo != "undefined") {
     $('#config').hide();
     valida();

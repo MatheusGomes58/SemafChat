@@ -1,9 +1,12 @@
 function createMenssager(text, user, hour) {
     var sendedMensager = "";
+    var usuario = "";
     if (user == userData) {
         sendedMensager = "me"
+        usuario = "você:"
     } else {
         sendedMensager = "you"
+        usuario = user + ":";
     }
 
     const chatContainer = document.querySelector('.chat-messages');
@@ -15,7 +18,7 @@ function createMenssager(text, user, hour) {
     messageInfo.className = 'message-info';
     const username = document.createElement('span');
     username.className = 'username';
-    username.textContent = 'Você:';
+    username.textContent = usuario;
 
     const messageTextElement = document.createElement('div');
     messageTextElement.className = 'message-text';

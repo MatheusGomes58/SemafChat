@@ -3,6 +3,9 @@ const databaseKeyboardLibras = `./IMG/DatabaseOfKeyboard/libras/`
 const databaseKeyboardMorse = `./IMG/DatabaseOfKeyboard/morse/`
 const databaseKeyboardNormal = `./IMG/DatabaseOfKeyboard/normal/`
 const databaseKeyboardSemaforico = `./IMG/DatabaseOfKeyboard/semaforico/`
+const keyboarContainer = document.getElementById("keyboard");
+const inputField = document.getElementById("insertKeys");
+var keyboardVisible = false;
 // Mapeia letras para nomes de imagens correspondentes
 const letterToImage = {
     "A": "1.png",
@@ -43,43 +46,38 @@ const letterToImage = {
     "0": "36.png",
     "+": "37.png",
     "-": "38.png",
-    " ": "39.png"
+    " ": "39.png",
+    "_": "39.png"
 };
 
-
 function randonKeys() {
-    shuffleKeys(userRandonKeys);
     renderKeys();
+    shuffleKeys(userRandonKeys);
+    displayWord();
 }
-
 
 //interpreta as teclas
 document.addEventListener("DOMContentLoaded", function () {
-    if (document.title == "Bate-Papo | DesbravaChat") {
-        const inputField = document.getElementById("insertMessenger");
-        const keyboardButtons = document.querySelectorAll(".key");
-        keyboardButtons.forEach((button) => {
-            button.addEventListener("click", function () {
-                const content = button.value;
-
-                // Verifica se o conteúdo do botão é uma imagem
-                const isImage = button.querySelector("img");
-
-                if (content == "-") {
-                    inputField.value = inputField.value.slice(0, -1);
-                } else if (content == "+") {
-                    //execução de envio da mensagem
-                } else {
-                    inputField.value += content;
-                }
-            });
+    const inputField = document.getElementById("insertMessenger");
+    const keyboardButtons = document.querySelectorAll("button");
+    keyboardButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            const content = button.value;
+            console.log(content)
+            if (content == "-") {
+                inputField.value = inputField.value.slice(0, -1);
+            } else if (content == "+") {
+                //execução de envio da mensagem
+            } else {
+                inputField.value += content;
+            }
         });
-    }
+    });
 });
 
 //renderiza as teclas
 function renderKeys() {
-    const keyboardButtons = document.querySelectorAll(".key");
+    const keyboardButtons = document.querySelectorAll("button");
 
     keyboardButtons.forEach((button) => {
         const letter = button.value;
@@ -98,23 +96,11 @@ function renderKeys() {
 
 // Função para embaralhar todas as teclas, mantendo os números na mesma linha
 function shuffleKeys(value) {
-    const keyboard = document.querySelector('.keyboard-row');
-    const numberRow = document.querySelector('.number-row');
+    const keyboard = document.getElementById("keyboard-row");
+    const numberRow = document.getElementById("number-row");
     const allButtons = Array.from(keyboard.querySelectorAll('.key'));
     const allButtonsNumbers = Array.from(numberRow.querySelectorAll('.key'));
 
-    // Exclui a tecla "Backspace" para não ser embaralhada
-    const backspaceButton = keyboard.querySelector('.key.backspace');
-    const index = allButtons.indexOf(backspaceButton);
-    if (index !== -1) {
-        allButtons.splice(index, 1);
-    }
-
-    // Exclui a tecla "space" para não ser embaralhada
-    const spaceButton = keyboard.querySelector('.key.space');
-    if (index !== -1) {
-        allButtons.splice(index, 1);
-    }
 
     if (value) {
         // Função de embaralhamento Fisher-Yates
@@ -141,8 +127,93 @@ function shuffleKeys(value) {
     allButtons.forEach(button => {
         keyboard.appendChild(button);
     });
-
-    // Adicione a tecla "Backspace" de volta ao teclado
-    //keyboard.appendChild(backspaceButton);
 }
+
+function renderKeyboard(numbers, actions) {
+    if (keyboardVisible) {
+        keyboarContainer.innerHTML = `
+            <div class="keyboard-container">
+                <div class="keyboard">
+                    <div class="number-row" id="number-row">
+                        <button class="key number" value="1" onclick="buttonClickHandler('1')"></button>
+                        <button class="key number" value="2" onclick="buttonClickHandler('2')"></button>
+                        <button class="key number" value="3" onclick="buttonClickHandler('3')"></button>
+                        <button class="key number" value="4" onclick="buttonClickHandler('4')"></button>
+                        <button class="key number" value="5" onclick="buttonClickHandler('5')"></button>
+                        <button class="key number" value="6" onclick="buttonClickHandler('6')"></button>
+                        <button class="key number" value="7" onclick="buttonClickHandler('7')"></button>
+                        <button class="key number" value="8" onclick="buttonClickHandler('8')"></button>
+                        <button class="key number" value="9" onclick="buttonClickHandler('9')"></button>
+                        <button class="key number" value="0" onclick="buttonClickHandler('10')"></button>
+                    </div>
+                    <div class="keyboard-row" id="keyboard-row">
+                        <button class="key" value="A" onclick="buttonClickHandler('A')"></button>
+                        <button class="key" value="B" onclick="buttonClickHandler('B')"></button>
+                        <button class="key" value="C" onclick="buttonClickHandler('C')"></button>
+                        <button class="key" value="D" onclick="buttonClickHandler('D')"></button>
+                        <button class="key" value="E" onclick="buttonClickHandler('E')"></button>
+                        <button class="key" value="F" onclick="buttonClickHandler('F')"></button>
+                        <button class="key" value="G" onclick="buttonClickHandler('G')"></button>
+                        <button class="key" value="H" onclick="buttonClickHandler('H')"></button>
+                        <button class="key" value="I" onclick="buttonClickHandler('I')"></button>
+                        <button class="key" value="J" onclick="buttonClickHandler('J')"></button>
+                        <button class="key" value="K" onclick="buttonClickHandler('K')"></button>
+                        <button class="key" value="L" onclick="buttonClickHandler('L')"></button>
+                        <button class="key" value="M" onclick="buttonClickHandler('M')"></button>
+                        <button class="key" value="N" onclick="buttonClickHandler('N')"></button>
+                        <button class="key" value="O" onclick="buttonClickHandler('O')"></button>
+                        <button class="key" value="P" onclick="buttonClickHandler('P')"></button>
+                        <button class="key" value="Q" onclick="buttonClickHandler('Q')"></button>
+                        <button class="key" value="R" onclick="buttonClickHandler('R')"></button>
+                        <button class="key" value="S" onclick="buttonClickHandler('S')"></button>
+                        <button class="key" value="T" onclick="buttonClickHandler('T')"></button>
+                        <button class="key" value="U" onclick="buttonClickHandler('U')"></button>
+                        <button class="key" value="V" onclick="buttonClickHandler('V')"></button>
+                        <button class="key" value="W" onclick="buttonClickHandler('W')"></button>
+                        <button class="key" value="X" onclick="buttonClickHandler('X')"></button>
+                        <button class="key" value="Y" onclick="buttonClickHandler('Y')"></button>
+                        <button class="key" value="Z" onclick="buttonClickHandler('Z')"></button>
+                    </div>
+                    <div class="math" id="actions">
+                        <button class="key space" value=" " onclick="buttonClickHandler(' ')" id="keySpace"></button>
+                        <button class="key backspace" value="-" onclick="buttonClickHandler('-')" id="keyBackspace"></button>
+                    </div>
+                </div>
+            </div>
+        `;
+        if(!numbers){
+            document.getElementById("number-row").innerHTML = ""
+        }if(!actions){
+            document.getElementById("actions").innerHTML = ""
+        }
+        randonKeys()
+    } else {
+        keyboarContainer.innerHTML = ``;
+    }
+
+    keyboardVisible = !keyboardVisible;
+}
+
+function buttonClickHandler(event) {
+    const content = event
+    if (content == "-") {
+        inputField.value = inputField.value.slice(0, -1);
+    } else if (content == "+") {
+        // Execução de envio da mensagem
+    } else {
+        inputField.value += content;
+    }
+    if (document.title == "Tela Inicial | DesbravaChat") {
+        reimantChar()
+    }
+}
+
+function reimantChar() {
+    const remainingChars = 100 - postInput.value.length;
+    charCount.textContent = remainingChars;
+    if (remainingChars < 0) {
+        postInput.value = postInput.value.substring(0, 100);
+        charCount.textContent = 0;
+    }
+};
 

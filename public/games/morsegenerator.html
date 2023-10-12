@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Código Morse</title>
+    <style>
+        #container {
+            text-align: center;
+        }
+
+        #output {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <button id="dot">.</button>
+        <button id="dash">-</button>
+        <button id="space">Espaço</button>
+        <button id="clear">Limpar</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        const morseCode = {
+            'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
+            'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+            'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---',
+            'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+            'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--',
+            'Z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--',
+            '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+            '9': '----.'
+        };
+
+        let currentMessage = '';
+
+        // Função para adicionar um ponto ou traço à mensagem
+        function addToMessage(char) {
+            currentMessage += char;
+            updateOutput();
+        }
+
+        // Função para adicionar um espaço à mensagem
+        function addSpace() {
+            currentMessage += ' ';
+            updateOutput();
+        }
+
+        // Função para limpar a mensagem
+        function clearMessage() {
+            currentMessage = '';
+            updateOutput();
+        }
+
+        function morseToText(morse) {
+            const morseArray = morse.split(' ');
+            let text = '';
+            for (let i = 0; i < morseArray.length; i++) {
+                if (morseArray[i] === '') {
+                    text += ' '; // Adicione um espaço em branco quando encontrar um espaço em código Morse
+                } else {
+                    for (const key in morseCode) {
+                        if (morseCode[key] === morseArray[i]) {
+                            text += key;
+                            break;
+                        }
+                    }
+                }
+            }
+            return text;
+        }
+
+
+        // Função para atualizar a saída
+        function updateOutput() {
+            document.getElementById('output').textContent = currentMessage;
+        }
+
+        // Função para converter a mensagem Morse em letras a cada segundo
+        function convertMorseToText() {
+            const text = morseToText(currentMessage);
+            document.getElementById('output').textContent = text;
+        }
+
+        document.getElementById('dot').addEventListener('click', () => {
+            addToMessage('.');
+        });
+
+        document.getElementById('dash').addEventListener('click', () => {
+            addToMessage('-');
+        });
+
+        document.getElementById('space').addEventListener('click', () => {
+            addSpace();
+        });
+
+        document.getElementById('clear').addEventListener('click', () => {
+            clearMessage();
+        });
+
+        // Configurar a conversão automática a cada segundo
+        setInterval(convertMorseToText, 1000);
+    </script>
+</body>
+
+</html>

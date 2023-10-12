@@ -5,10 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tela Inicial | DesbravaChat</title>
-  <link href="./CSS/homePage.css" rel="stylesheet">
-  <link rel="stylesheet" href="./CSS/homePage.css">
-  <link rel="stylesheet" href="./CSS/keyboard.css">
-  <link rel="stylesheet" href="./CSS/modal.css">
+  <link href="./CSS/homePage.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="./CSS/homePage.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/postsPage.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/modal.css">
   <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <link rel="icon" type="image/png" href="./IMG/LOGUINHOAMP.png" />
 </head>
@@ -16,10 +17,12 @@
 <body class="container">
   <div id="home-box">
     <header>
-      <input type="text" id="searchInput" placeholder="Pesquisar por usuários">
-      <button id="searchButton" class="key"><img src="./IMG/search.png"></button>
-      <button id="settingsButton" class="key"><img src="./IMG/set.png"></button>
-      <button id="createChatButton" class="key"><img src="./IMG/add.png"></button>
+      <input type="text" id="searchInput" placeholder="Pesquisar...">
+      <div class="buttonAlign">
+        <button class="button" id="searchButton" class="button"><img src="./IMG/search.png"></button>
+        <button class="button" id="settingsButton" class="button"><img src="./IMG/set.png"></button>
+        <button class="button" id="createChatButton" class="button"><img src="./IMG/add.png"></button>
+      </div>
     </header>
     <nav>
       <ul>
@@ -27,7 +30,7 @@
         <li><a href="#updates">Atualizações</a></li>
         <li><a href="#minigames">Jogos</a></li>
       </ul>
-    </nav>    
+    </nav>
 
     <main class="sections">
       <section id="chats">
@@ -35,12 +38,43 @@
         </p>
       </section>
       <section id="updates">
+        <div class="postsHeader">
+          <input type="text" id="insertKeys" placeholder="O que está acontecendo? (limite: 100 caracteres)"
+            onclick="renderKeyboard(true,true)" readonly>
+          <div class="buttonAlign">
+            <span id="char-count">100</span>
+            <button id="send-button" value="+"><img src="./IMG/DatabaseOfKeyboard/libras/37.png" alt="+"></button>
+          </div>
+        </div>
+        <div id="posts"></div>
       </section>
       <section id="minigames">
+        <p id="chatList" class="whatsapp-chat-list">
+          <li class="chat-item" onclick="openWordUndefined()">
+            <div class="chat-details">
+              <h3>Jogo de Adivinhação de Palavras</h3>
+            </div>
+          </li>
+          <li class="chat-item">
+            <div class="chat-details">
+              <h3>Jogo da Memória</h3>
+            </div>
+          </li>
+          <li class="chat-item">
+            <div class="chat-details">
+              <h3>Jogo dos anagramas</h3>
+            </div>
+          </li>
+          <li class="chat-item">
+            <div class="chat-details">
+              <h3>Jogo de sudoku</h3>
+            </div>
+          </li>
+        </p>
       </section>
     </main>
 
-
+    <div id="keyboard"></div>
     <div class="modal" id="createChatModal">
       <div class="modal-content">
         <h2>Criar Novo Chat</h2>
@@ -51,9 +85,9 @@
           <div id="userFields">
           </div>
           <div class="modal-row">
-            <button type="button" onclick="addUserField()">Adicionar Usuário</button>
-            <button type="button" onclick="createChat()">Criar</button>
-            <button type="button" onclick="closeCreateChatModal()">Cancelar</button>
+            <button class="button" type="button" onclick="addUserField()"><img src="./IMG/addUser.png"></button>
+            <button class="button" type="button" onclick="createChat()"><img src="./IMG/saveFile.png"></button>
+            <button class="button" type="button" onclick="closeCreateChatModal()"><img src="./IMG/close.png"></button>
           </div>
         </form>
       </div>
@@ -70,10 +104,10 @@
           <div id="userFieldsUpdate">
           </div>
           <div class="modal-row">
-            <button type="button" onclick="addUserUpdateField()">Adicionar Usuário</button>
-            <button type="button" onclick="updateChatUsers()">Editar</button>
-            <button type="button" onclick="deleteChat()">Deletar</button>
-            <button type="button" onclick="closeUpdateChatModal()">Cancelar</button>
+            <button class="button" type="button" onclick="addUserUpdateField()"><img src="./IMG/addUser.png"></button>
+            <button class="button" type="button" onclick="updateChatUsers()"><img src="./IMG/changeFile.png"></button>
+            <button class="button" type="button" onclick="deleteChat()"><img src="./IMG/delete.png"></button>
+            <button class="button" type="button" onclick="closeUpdateChatModal()"><img src="./IMG/close.png"></button>
           </div>
         </form>
       </div>
@@ -105,10 +139,10 @@
             </label>
           </div>
           <div class="modal-row">
-            <button type="button" onclick="updateUser()">Editar</button>
-            <button type="button" onclick="deleteChat()">Deletar</button>
-            <button type="button" onclick="logout()">Sair</button>
-            <button type="button" onclick="closeUpdateUserModal()">Cancelar</button>
+            <button class="button" type="button" onclick="updateUser()"><img src="./IMG/changeFile.png"></button>
+            <button class="button" type="button" onclick="deleteChat()"><img src="./IMG/delete.png"></button>
+            <button class="button" type="button" onclick="logout()"><img src="./IMG/logout.png"></button>
+            <button class="button" type="button" onclick="closeUpdateUserModal()"><img src="./IMG/close.png"></button>
           </div>
         </form>
       </div>
@@ -124,6 +158,7 @@
     <script src="./JS/modal.js"></script>
     <script src="./JS/navigation.js"></script>
     <script src="./JS/renderChats.js"></script>
+    <script src="./JS/postsPage.js"></script>
     <script src="./JS/keyboard.js"></script>
     <script src="./JS/homePage.js"></script>
 </body>

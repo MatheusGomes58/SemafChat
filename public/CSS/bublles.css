@@ -1,10 +1,9 @@
 .chat-bubble {
     padding: 10px;
     margin: 5px;
-    border-radius: 10px; /* Cantos arredondados */
+    border-radius: 30px; /* Cantos arredondados */
     clear: both;
     overflow: hidden;
-    min-width: 100px;
 }
 
 .you {
@@ -25,6 +24,10 @@
 .message-info {
     margin-bottom: 5px;
     font-weight: bold;
+}
+
+.message-text {
+    max-width: 100%;
 }
 
 .username {

@@ -63,15 +63,34 @@ function findUltimateMessanger(chat, chatId, lastMessageID) {
 
 
 // Função para executar a pesquisa de usuário
-function searchUsers() {
+function search() {
+  var page = document.querySelector(".active")
   const searchInput = document.getElementById("searchInput");
-  const searchTerm = searchInput.value.trim(); // Obtém o termo de pesquisa
+  const searchTerm = searchInput.value.trim(); 
 
-  // Execute a lógica de pesquisa aqui (por exemplo, mostrar resultados em uma lista)
-  if (searchTerm !== "") {
-    alert(`Pesquisando por usuários com o termo: ${searchTerm}`);
+  if(page.innerHTML == "Conversas"){
+    if (searchTerm !== "") {
+      const filteredChats = chatsData.filter(chat => {
+        return chat.name.includes(searchTerm);
+      });
+      renderChats(filteredChats);
+    } else {
+      renderChats(chatsData);
+    }
+  }else if(page.innerHTML == "Atualizações"){
+    postsContainer.innerHTML = "";
+    if (searchTerm !== "") {
+      const filteredPost = listaDePosts.filter(post => {
+        return post.userPost.includes(searchTerm) || post.postText.includes(searchTerm);
+      });
+      renderPosts(filteredPost);
+    }else{   
+      renderPosts(listaDePosts);
+    }
   }
+
 }
+
 
 // Adiciona um evento de clique ao botão "Criar Novo Chat"
 const createChatButton = document.getElementById("createChatButton");
@@ -79,7 +98,7 @@ createChatButton.addEventListener("click", openCreateChatModal);
 
 // Adiciona um evento de clique ao botão "Buscar"
 const searchButton = document.getElementById("searchButton");
-searchButton.addEventListener("click", searchUsers);
+searchButton.addEventListener("click", search);
 
 // Adiciona um evento de clique ao botão "Criar editar usuário"
 const updateUserModalButton = document.getElementById("settingsButton");
@@ -105,5 +124,9 @@ menuLinks.forEach((link) => {
     event.target.classList.add('active');
   });
 });
+
+function openWordUndefined(){
+  window.location.href = "wordUndefined.html";
+}
 
 

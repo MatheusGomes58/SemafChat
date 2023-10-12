@@ -22,6 +22,5 @@ function enviarEmailRedefinicaoSenha(email) {
 
 function changePassword(){
     customerEmail = document.getElementById("emailm").value;
-    console.log(customerEmail)
     enviarEmailRedefinicaoSenha(customerEmail);
 }

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo de Adivinhação de Palavras</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #word-display {
+            font-size: 24px;
+        }
+
+        #input-letter {
+            font-size: 20px;
+            width: 40px;
+        }
+
+        #btn-guess {
+            font-size: 16px;
+        }
+
+        #message {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo de Adivinhação de Palavras</h1>
+    <p>Adivinhe a palavra:</p>
+    <div id="word-display"></div>
+    <p>Tentativas restantes: <span id="attempts">6</span></p>
+    <p>Letra: <input type="text" id="input-letter" maxlength="1"></p>
+    <button id="btn-guess">Adivinhar</button>
+    <p id="message"></p>
+
+    <script>
+        // Lista de palavras para o jogo
+        const palavras = ["javascript", "programacao", "computador", "desenvolvimento", "html", "css", "openai"];
+        
+        // Seleciona uma palavra aleatória da lista
+        let palavraSelecionada = palavras[Math.floor(Math.random() * palavras.length)];
+        
+        // Inicializa a palavra oculta
+        let palavraOculta = Array(palavraSelecionada.length).fill("_");
+        
+        // Número de tentativas permitidas
+        let tentativasRestantes = 6;
+        
+        // Elementos da página
+        const wordDisplay = document.getElementById("word-display");
+        const inputLetter = document.getElementById("input-letter");
+        const btnGuess = document.getElementById("btn-guess");
+        const message = document.getElementById("message");
+        const attempts = document.getElementById("attempts");
+        
+        // Exibe a palavra oculta na página
+        function displayWord() {
+            wordDisplay.textContent = palavraOculta.join(" ");
+        }
+        
+        // Verifica se a letra está na palavra
+        function checkLetter(letter) {
+            let letterFound = false;
+            for (let i = 0; i < palavraSelecionada.length; i++) {
+                if (palavraSelecionada[i] === letter) {
+                    palavraOculta[i] = letter;
+                    letterFound = true;
+                }
+            }
+            return letterFound;
+        }
+        
+        // Manipula o clique no botão "Adivinhar"
+        btnGuess.addEventListener("click", function() {
+            const letter = inputLetter.value.toLowerCase();
+            
+            if (letter.length !== 1 || !/^[a-z]$/.test(letter)) {
+                message.textContent = "Por favor, insira uma única letra válida.";
+                return;
+            }
+            
+            if (palavraOculta.includes(letter)) {
+                message.textContent = "Você já adivinhou essa letra.";
+                return;
+            }
+            
+            const letterFound = checkLetter(letter);
+            if (letterFound) {
+                message.textContent = "Letra correta!";
+            } else {
+                message.textContent = "Letra incorreta.";
+                tentativasRestantes--;
+                attempts.textContent = tentativasRestantes;
+            }
+            
+            if (tentativasRestantes <= 0) {
+                message.textContent = `Você perdeu! A palavra era "${palavraSelecionada}".`;
+                btnGuess.disabled = true;
+            }
+            
+            if (!palavraOculta.includes("_")) {
+                message.textContent = "Parabéns! Você ganhou!";
+                btnGuess.disabled = true;
+            }
+            
+            displayWord();
+            inputLetter.value = "";
+        });
+        
+        displayWord();
+    </script>
+</body>
+</html>

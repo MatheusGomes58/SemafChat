@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo de Palavras Embaralhadas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #output {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo de Palavras Embaralhadas</h1>
+    <p>Veja a palavra embaralhada abaixo e adivinhe a palavra correta:</p>
+    <p id="scrambledWord"></p>
+    <input type="text" id="guessField">
+    <input type="submit" value="Adivinhar" id="guessSubmit">
+    <p id="output"></p>
+
+    <script>
+        // Lista de palavras para o jogo
+        const palavras = ["javascript", "programacao", "desenvolvimento", "computador", "web"];
+
+        // Escolha uma palavra aleatória
+        const palavraSecreta = palavras[Math.floor(Math.random() * palavras.length)];
+
+        // Embaralhar a palavra
+        const palavraEmbaralhada = embaralharPalavra(palavraSecreta);
+
+        // Obter elementos HTML
+        const output = document.getElementById("output");
+        const scrambledWord = document.getElementById("scrambledWord");
+        const guessSubmit = document.getElementById("guessSubmit");
+
+        // Mostrar a palavra embaralhada
+        scrambledWord.textContent = palavraEmbaralhada;
+
+        // Adicionar um ouvinte de evento para o botão de adivinhar
+        guessSubmit.addEventListener("click", verificarAdivinhacao);
+
+        // Função para embaralhar uma palavra
+        function embaralharPalavra(word) {
+            const arrayPalavra = word.split("");
+            for (let i = arrayPalavra.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arrayPalavra[i], arrayPalavra[j]] = [arrayPalavra[j], arrayPalavra[i]];
+            }
+            return arrayPalavra.join("");
+        }
+
+        // Função para verificar a adivinhação do jogador
+        function verificarAdivinhacao() {
+            const guess = document.getElementById("guessField").value.toLowerCase();
+
+            if (guess === palavraSecreta) {
+                output.textContent = "Parabéns! Você acertou a palavra!";
+            } else {
+                output.textContent = "Tente novamente. A palavra está incorreta.";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo de Memória</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .card {
+            width: 100px;
+            height: 150px;
+            background: #f0f0f0;
+            border: 2px solid #333;
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 24px;
+            line-height: 150px;
+        }
+        #game-board {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo de Memória</h1>
+    <p>Clique nas cartas para encontrar pares correspondentes.</p>
+    <div id="game-board"></div>
+
+    <script>
+        const cards = ["A", "B", "C", "D", "E", "F", "G", "H", "A", "B", "C", "D", "E", "F", "G", "H"];
+        let flippedCards = [];
+        let matchedCards = [];
+
+        // Embaralhar as cartas
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        shuffle(cards);
+
+        // Cria as cartas e as adiciona ao tabuleiro
+        const gameBoard = document.getElementById("game-board");
+        cards.forEach((card, index) => {
+            const cardElement = document.createElement("div");
+            cardElement.className = "card";
+            cardElement.dataset.cardValue = card;
+            cardElement.dataset.index = index;
+            cardElement.textContent = "?";
+            cardElement.addEventListener("click", flipCard);
+            gameBoard.appendChild(cardElement);
+        });
+
+        // Função para virar uma carta
+        function flipCard(event) {
+            const card = event.target;
+            if (!flippedCards.includes(card) && flippedCards.length < 2) {
+                card.textContent = card.dataset.cardValue;
+                flippedCards.push(card);
+
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 1000);
+                }
+            }
+        }
+
+        // Função para verificar se as cartas formam um par
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            if (card1.dataset.cardValue === card2.dataset.cardValue) {
+                matchedCards.push(card1, card2);
+                if (matchedCards.length === cards.length) {
+                    setTimeout(() => alert("Parabéns, você venceu o jogo!"), 200);
+                }
+            } else {
+                card1.textContent = "?";
+                card2.textContent = "?";
+            }
+            flippedCards = [];
+        }
+    </script>
+</body>
+</html>

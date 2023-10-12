@@ -1,5 +1,4 @@
-
-const messageInput = document.getElementById("insertMessenger");
+const messageInput = document.getElementById("insertKeys");
 const chatMessages = document.querySelector(".chat-messages");
 const now = new Date();
 
@@ -39,12 +38,19 @@ function enviarMensagem() {
 
 // Função para exibir mensagens em tempo real
 function exibirMensagens() {
-    userChat = localStorage.getItem("userChat")
+    userChat = localStorage.getItem("userChat");
     const messagesRef = firebase.database().ref("mensagens/" + userChat);
     
     messagesRef.on('child_added', (snapshot) => {
         const mensagem = snapshot.val();
         createMenssager(mensagem.mensagem, mensagem.user, mensagem.timestamp);
+        
+        // Após adicionar a mensagem, role para a parte inferior
+        scrollChatToBottom();
     });
 }
 
+function scrollChatToBottom() {
+    var chatMessages = document.querySelector('.chat-messages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}

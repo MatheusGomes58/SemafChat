@@ -6,17 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | DesbravaChat</title>
   <link rel="stylesheet" type="text/css" href="./CSS/login.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/chatPage.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
   <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <link rel="icon" type="image/png" href="./IMG/LOGUINHOAMP.png" />
-  <link rel="stylesheet" href="./CSS/chatPage.css">
-  <link rel="stylesheet" href="./CSS/keyboard.css">
-  <link rel="stylesheet" href="./CSS/bublles.css">
 </head>
 
 <body class="container">
   <div id="login-box">
     <div class="img-container">
-      <img src="./IMG/LOGO.png" height="200px">
+      <img src="./IMG/LOGO.png">
     </div>
     <div class="form-container">
       <div class="form-row">
@@ -26,11 +25,11 @@
         <input type="password" id="password" name="password" placeholder="Senha:" required>
       </div>
       <div class="form-row">
-        <p><input type="submit" value="Entrar" onclick="login()" class="key"> 
-          <a href="./recover.html" class="link">esqueci a senha<a></a></p>
+        <input type="submit" value="Entrar" onclick="login()" class="button"> 
+          <a href="./recover.html" class="link">esqueci a senha<a></a>
       </div>
       <div class="form-row">
-        <p>Não tem acesso? <a href="./register.html" class="link">o que fazer?<a></p>
+        Não tem acesso? <a href="./register.html" class="link">o que fazer?<a>
       </div>
     </div>
   </div>
