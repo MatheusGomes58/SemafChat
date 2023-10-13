@@ -183,7 +183,9 @@ function renderKeyboard(numbers, actions) {
             document.getElementById("number-row").innerHTML = ""
         } if (!actions) {
             document.getElementById("actions").innerHTML = ""
-        } if (!actions && !numbers) {
+        } if (document.title == "Advinhação de Palavras | CodeCipherChat") {
+            displayWord();
+        }if (document.title == "Anágramas | CodeCipherChat") {
             displayWord();
         }
         randonKeys()
@@ -201,6 +203,7 @@ function buttonClickHandler(event) {
     } else if (content == "+") {
         // Execução de envio da mensagem
     } else {
+        console.log(content)
         inputField.value += content;
     }
     if (document.title == "Tela Inicial | CodeCipherChat") {

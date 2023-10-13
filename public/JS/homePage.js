@@ -139,4 +139,7 @@ function openGameMemory() {
   window.location.href = "gameMemory.html";
 }
 
+function openWordRandon() {
+  window.location.href = "wordRandon.html";
+}
 

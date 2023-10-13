@@ -129,8 +129,11 @@ async function getUserInfo() {
       exibirMensagens()
     } if (document.title == "Advinhação de Palavras | CodeCipherChat") {
       renderKeyboard(false, false);
-    }if(document.title == "Jogo da Memória | CodeCipherChat"){
+    } if (document.title == "Jogo da Memória | CodeCipherChat") {
       createGame(8)
+    }if (document.title == "Anágramas | CodeCipherChat") {
+      createGame()
+      renderKeyboard(false, true);
     }
   }
 }
@@ -150,9 +153,11 @@ function updateUser() {
   const userRandonKeysCheckbox = document.getElementById("trueRandonKeys");
   const userRef = db.collection("users").doc(userId);
 
-  // Verifique se todos os campos estão preenchidos
   if (!emailInput.value || !userDataInput.value || !userKeyboardDataInput.value) {
-    console.error("Por favor, preencha todos os campos.");
+    swal.fire({
+      icon: "warning",
+      title: "Por favor, preencha todos os campos.",
+    })
     return;
   }
 
@@ -176,6 +181,10 @@ function updateUser() {
       searchChats()
     })
     .catch((error) => {
-      console.error("Erro ao atualizar os dados do usuário:", error);
+      swal.fire({
+        icon: "warning",
+        title: "Erro ao atualizar os dados do usuário",
+        text: error
+      })
     });
 }

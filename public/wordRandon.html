@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anágramas | CodeCipherChat</title>
+  <link href="./CSS/homePage.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="./CSS/homePage.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/wordRandon.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/postsPage.css">
+  <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
+</head>
+
+<body class="container">
+  <div id="home-box">
+    <h1>Jogo dos Anágramas</h1>
+    <p>Veja a palavra embaralhada abaixo e adivinhe a palavra correta:</p>
+    <p id="scrambledWord"></p>
+    <div class="postsHeader">
+      <input type="text" id="insertKeys" placeholder="Palavra correta" readonly>
+      <div class="buttonAlign">
+        <button id="send-button" value="+"><img src="./IMG/DatabaseOfKeyboard/libras/37.png" alt="+"></button>
+      </div>
+    </div>
+    <p id="output"></p>
+    <div id="keyboard"></div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+  <script src="./JS/authFirebase.js"></script>
+  <script src="./JS/userCredentials.js"></script>
+  <script src="./JS/keyboard.js"></script>
+  <script src="./JS/wordRandon.js"></script>
+</body>
+
+</html>

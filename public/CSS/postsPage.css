@@ -52,6 +52,8 @@ body {
     font-weight: bold;
     font-size: 18px;
     border-radius: 10px;
-    height: 5%;
+    height: auto;
     width: auto;
+    min-width: 60%;
+    overflow: auto;
 }

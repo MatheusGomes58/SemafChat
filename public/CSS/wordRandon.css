@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+#output {
+    font-size: 24px;
+}
+
+#scrambledWord{
+    height: auto;
+    width: auto;
+}

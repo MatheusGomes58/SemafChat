@@ -26,7 +26,7 @@ var palavraSelecionada = palavras[Math.floor(Math.random() * palavras.length)];
 var palavraOculta = palavraSelecionada.split('').map(char => (char === ' ') ? ' ' : '_');
 var tentativasRestantes = 6;
 
-function randonWords(){
+function randonWords() {
     palavraSelecionada = palavras[Math.floor(Math.random() * palavras.length)];
     palavraOculta = palavraSelecionada.split('').map(char => (char === ' ') ? ' ' : '_');
     tentativasRestantes = 6;
@@ -53,7 +53,7 @@ function displayWord() {
                 imageElement.classList.add('sizeOfImage');
             } else {
                 imageElement.classList.add('sizeOfImageWord');
-            }            
+            }
 
             processedPostText += imageElement.outerHTML;
         } else {
@@ -83,7 +83,7 @@ function processInput() {
     const attempts = document.getElementById("attempts");
 
     const letter = inputLetter.value.trim().toUpperCase();
-    
+
     if (letter != "" && tentativasRestantes > 0) {
 
         if (letter.length === 1 && /^[a-zA-Z]$/.test(letter)) {
@@ -100,21 +100,29 @@ function processInput() {
                 }
 
                 if (tentativasRestantes <= 0) {
-                    message.textContent = `Você perdeu! A palavra era "${palavraSelecionada}". Pressione qualquer tecla para iniciar outro jogo.`;
+                    swal.fire({
+                        icon: "error",
+                        title: "Você perdeu!",
+                        text: "A palavra era " + palavraSelecionada + ". Pressione qualquer tecla para iniciar outro jogo."
+                    })
                 }
 
                 if (!palavraOculta.includes("_")) {
-                    message.textContent = "Parabéns! Você ganhou!";
+                    swal.fire({
+                        icon: "error",
+                        title: "Parabéns! Você ganhou!",
+                        text: `Pressione qualquer tecla para iniciar outro jogo.`
+                    })
                 }
 
                 displayWord();
                 inputLetter.value = "";
             }
-        }else{
+        } else {
             inputLetter.value = "";
             message.textContent = "Pressione apenas 1 botão por vez!";
         }
-    }else if(tentativasRestantes === 0){
+    } else if (tentativasRestantes === 0) {
         randonWords()
     }
 }
