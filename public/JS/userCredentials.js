@@ -10,58 +10,66 @@ let userChat = "";
 var typeOfKeyboard = "";
 
 function login() {
-  if (firebase.auth().currentUser) {
-    firebase.auth().signOut()
-  }
+  const email = document.getElementById("email").value.toLowerCase();
+  const password = document.getElementById("password").value;
 
-  email = document.getElementById("email").value.toLowerCase()
-  password = document.getElementById("password").value
+  // Realizar login com e-mail e senha
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
 
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(() => {
-      swal
-        .fire({
+      // Verificar se o e-mail foi confirmado
+      if (user.emailVerified) {
+        // Usuário confirmou o e-mail, redirecione para a página principal
+        swal.fire({
           icon: "success",
           title: "Login realizado com sucesso",
-        })
-        .then(() => {
+        }).then(() => {
           setTimeout(() => {
-            window.location.replace("./homePage.html")
-          }, 1000)
-        })
+            window.location.replace("./homePage.html");
+          }, 1000);
+        });
+      } else {
+        // E-mail não foi confirmado
+        swal.fire({
+          icon: "error",
+          title: "E-mail não confirmado. Verifique sua caixa de entrada para o link de confirmação.",
+        });
+        // Deslogar o usuário
+        firebase.auth().signOut();
+      }
     })
     .catch((error) => {
-      const errorCode = error.code
+      // Trate os erros de autenticação aqui
+      const errorCode = error.code;
       switch (errorCode) {
         case "auth/wrong-password":
           swal.fire({
             icon: "error",
             title: "Senha inválida",
-          })
-          break
+          });
+          break;
         case "auth/invalid-email":
           swal.fire({
             icon: "error",
             title: "E-mail inválido",
-          })
-          break
+          });
+          break;
         case "auth/user-not-found":
-          swal
-            .fire({
-              icon: "warning",
-              title: "Usuário não encontrado",
-            })
-          break
+          swal.fire({
+            icon: "warning",
+            title: "Usuário não encontrado",
+          });
+          break;
         default:
           swal.fire({
             icon: "error",
             title: error.message,
-          })
+          });
       }
-    })
+    });
 }
+
 
 function logout() {
   firebase.auth().signOut()
