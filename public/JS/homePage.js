@@ -129,4 +129,8 @@ function openWordUndefined(){
   window.location.href = "wordUndefined.html";
 }
 
+function openGameMemory(){
+  window.location.href = "gameMemory.html";
+}
+
 

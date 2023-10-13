@@ -4,24 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advinhação de Palavras | CodeCipherChat</title>
+  <title>Jogo da Memória | CodeCipherChat</title>
   <link href="./CSS/homePage.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="./CSS/homePage.css">
   <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
-  <link rel="stylesheet" type="text/css" href="./CSS/undefinedWord.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/gameMemory.css">
   <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
 </head>
 
 <body class="container">
   <div id="home-box">
-    <input type="text" id="insertKeys" maxlength="1" hidden>
-    <h1>Jogo de Adivinhação de Palavras</h1>
-    <p>Adivinhe a palavra:</p>
-    <div id="word-display"></div>
-    <p>Tentativas restantes: <span id="attempts">6</span></p>
-    <p id="message"></p>
-    <div id="keyboard"></div>
+    <div class="sections">
+      <h1>Jogo de Memória</h1>
+      <p>Clique nas cartas para encontrar pares correspondentes.</p>
+      <div id="game-board"></div>
+    </div>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
@@ -32,7 +30,7 @@
   <script src="./JS/authFirebase.js"></script>
   <script src="./JS/userCredentials.js"></script>
   <script src="./JS/keyboard.js"></script>
-  <script src="./JS/undefinedWord.js"></script>
+  <script src="./JS/gameMemory.js"></script>
 </body>
 
 </html>

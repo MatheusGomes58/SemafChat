@@ -68,13 +68,13 @@ function logout() {
 }
 
 function getUser() {
-  if (document.title != "Login | DesbravaChat") {
+  if (document.title != "Login | CodeCipherChat") {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         currentUser.uid = user.uid
         if (email != null) {
           email = user.email
-          if (document.title == "Tela Inicial | DesbravaChat") {
+          if (document.title == "Tela Inicial | CodeCipherChat") {
             searchChats();
             exibirPosts()
           }
@@ -125,10 +125,12 @@ async function getUserInfo() {
         typeOfKeyboard = databaseKeyboardNormal;
         break;
     }
-    if (document.title == "Bate-Papo | DesbravaChat") {
+    if (document.title == "Bate-Papo | CodeCipherChat") {
       exibirMensagens()
-    } if (document.title == "Advinhação de Palavras | DesbravaChat") {
+    } if (document.title == "Advinhação de Palavras | CodeCipherChat") {
       renderKeyboard(false, false);
+    }if(document.title == "Jogo da Memória | CodeCipherChat"){
+      createGame(8)
     }
   }
 }

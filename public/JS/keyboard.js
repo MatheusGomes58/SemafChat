@@ -204,7 +204,7 @@ function buttonClickHandler(event) {
     } else {
         inputField.value += content;
     }
-    if (document.title == "Tela Inicial | DesbravaChat") {
+    if (document.title == "Tela Inicial | CodeCipherChat") {
         reimantChar()
     }
 }

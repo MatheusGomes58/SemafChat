@@ -48,11 +48,12 @@ function displayWord() {
         if (letterToImage.hasOwnProperty(character)) {
             const imageElement = document.createElement('img');
             imageElement.src = `${typeOfKeyboard}${letterToImage[character]}`;
-            imageElement.classList.add('sizeOfImageWord');
 
-            if (!isNaN(character) && character.trim() !== "") {
-                imageElement.classList.add('number');
-            }
+            if (character === " ") {
+                imageElement.classList.add('sizeOfImage');
+            } else {
+                imageElement.classList.add('sizeOfImageWord');
+            }            
 
             processedPostText += imageElement.outerHTML;
         } else {
@@ -109,6 +110,9 @@ function processInput() {
                 displayWord();
                 inputLetter.value = "";
             }
+        }else{
+            inputLetter.value = "";
+            message.textContent = "Pressione apenas 1 botão por vez!";
         }
     }else if(tentativasRestantes === 0){
         randonWords()
