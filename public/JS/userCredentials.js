@@ -131,7 +131,7 @@ async function getUserInfo() {
       renderKeyboard(false, false);
     } if (document.title == "Jogo da Memória | CodeCipherChat") {
       createGame(8)
-    }if (document.title == "Anágramas | CodeCipherChat") {
+    } if (document.title == "Anágramas | CodeCipherChat") {
       createGame()
       renderKeyboard(false, true);
     }
@@ -176,9 +176,13 @@ function updateUser() {
   // Atualize os dados do usuário no Firestore
   userRef.update(updatedUserData)
     .then(() => {
-      closeUpdateUserModal()
       getUserInfo()
       searchChats()
+      closeUpdateUserModal()
+      swal.fire({
+        icon: "success",
+        title: "Dados do usuário atualizado com sucesso.",
+      })
     })
     .catch((error) => {
       swal.fire({

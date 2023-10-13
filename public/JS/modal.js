@@ -159,6 +159,11 @@ function updateChatUsers() {
             }
         })
         .then(() => {
+            swal.fire({
+                icon: "success",
+                title: "Alteração salva com sucesso!",
+                text: "A lista de usuários do chat foi atualizada."
+            })
             closeUpdateChatModal();
         })
         .catch(error => {
@@ -168,51 +173,65 @@ function updateChatUsers() {
 
 function deleteChat() {
     const chatName = document.getElementById("chatNameUpdate").value;
+    swal.fire({
+        icon: "warning",
+        title: `Tem certeza de que deseja sair do chat "${chatName}"?`,
+        text: "Deseja realmente sair do chat?",
+        showCancelButton: true,
+        cancelButtonText: "Não",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim",
+        confirmButtonColor: "#3085d6",
+    }).then((result) => {
+        if (result.value) {
+            // Continue com a remoção do usuário do chat
+            db.collection("chats").where("chat", "==", chatName)
+                .get()
+                .then(querySnapshot => {
+                    if (!querySnapshot.empty) {
+                        // Vamos assumir que só há um chat correspondente, então pegamos o primeiro
+                        const chatDoc = querySnapshot.docs[0];
 
-    // Verifique com o usuário se ele realmente deseja sair do chat
-    const confirmRemove = window.confirm(`Tem certeza de que deseja sair do chat "${chatName}"?`);
+                        // Verifique se a propriedade "users" existe no documento do chat
+                        if (chatDoc.exists && chatDoc.data().user) {
+                            // Atualize o array de usuários do chat para remover o email
+                            const users = chatDoc.data().user;
+                            const updatedUsers = users.filter(user => user !== email);
 
-    if (!confirmRemove) {
-        return; // O usuário cancelou a remoção, saia da função
-    }
-
-    // Continue com a remoção do usuário do chat
-    db.collection("chats").where("chat", "==", chatName)
-        .get()
-        .then(querySnapshot => {
-            if (!querySnapshot.empty) {
-                // Vamos assumir que só há um chat correspondente, então pegamos o primeiro
-                const chatDoc = querySnapshot.docs[0];
-
-                // Verifique se a propriedade "users" existe no documento do chat
-                if (chatDoc.exists && chatDoc.data().user) {
-                    // Atualize o array de usuários do chat para remover o email
-                    const users = chatDoc.data().user;
-                    const updatedUsers = users.filter(user => user !== email);
-
-                    if (updatedUsers.length === 1) {
-                        // Se houver apenas um usuário, atualize para uma lista vazia
-                        return chatDoc.ref.update({ user: [] });
+                            if (updatedUsers.length === 1) {
+                                // Se houver apenas um usuário, atualize para uma lista vazia
+                                return chatDoc.ref.update({ user: [] });
+                            }
+                            else {
+                                // Caso contrário, atualize para a lista filtrada
+                                return chatDoc.ref.update({ user: updatedUsers });
+                            }
+                        }
+                        else {
+                            throw new Error("Estrutura de dados do chat inválida ou propriedade 'user' não encontrada");
+                        }
+                    } else {
+                        throw new Error("Chat não encontrado no Firestore");
                     }
-                    else {
-                        // Caso contrário, atualize para a lista filtrada
-                        return chatDoc.ref.update({ user: updatedUsers });
-                    }
-                }
-                else {
-                    throw new Error("Estrutura de dados do chat inválida ou propriedade 'user' não encontrada");
-                }
-            } else {
-                throw new Error("Chat não encontrado no Firestore");
-            }
-        })
-        .then(() => {
-            closeUpdateChatModal();
-            searchChats();
-        })
-        .catch(error => {
-            console.error("Erro ao remover usuário do chat:", error);
-        }); searchChats();
+                })
+                .then(() => {
+                    swal.fire({
+                        icon: "success",
+                        title: "Você saiu do chat com sucesso!",
+                        text: "Os dados do chat foram deletados do seu usuário."
+                    })
+                    searchChats();
+                    closeUpdateChatModal();
+                })
+                .catch(error => {
+                    swal.fire({
+                        icon: "error",
+                        title: "Erro ao remover usuário do chat!",
+                        text: error
+                    })
+                }); searchChats();
+        }
+    })
 
 }
 
