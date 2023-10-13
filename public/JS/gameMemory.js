@@ -7,17 +7,17 @@ let cards = [...letters, ...letters];
 let flippedCards = [];
 let matchedCards = [];
 let selected = [];
+let numToChoose = 0;
 
-function createGame(numToChoose) {
+function createGame(Choose) {
     // Selecionar aleatoriamente um subconjunto do array com o tamanho especificado (numToChoose)
-    while (selected.length < (numToChoose*2) && letters.length > 0) {
+    numToChoose = Choose;
+    while (selected.length < (numToChoose * 2) && letters.length > 0) {
         var randomIndex = Math.floor(Math.random() * letters.length);
         selected.push(letters[randomIndex]);
         selected.push(letters[randomIndex]);
         letters.splice(randomIndex, 1);
     }
-
-    console.log(selected)
 
     // Embaralhar o subconjunto selecionado
     for (let i = selected.length - 1; i > 0; i--) {
@@ -26,6 +26,7 @@ function createGame(numToChoose) {
     }
 
     const gameBoard = document.getElementById("game-board");
+    gameBoard.innerHTML = ""
     selected.forEach((card, index) => {
         const cardElement = document.createElement("div");
         cardElement.className = "card";
@@ -71,11 +72,12 @@ function flipCard(event) {
                     const back = flippedCard.querySelector(".card-back");
                     front.classList.toggle("hidden");
                     back.classList.toggle("hidden");
-                });
+                }); 
+                checkMatch()
                 flippedCards = [];
             }, 1000);
         } else {
-            // Se as cartas forem iguais, mantenha-as viradas
+            checkMatch()
             flippedCards = [];
         }
     }
@@ -90,12 +92,22 @@ function checkMatch() {
     const [card1, card2] = flippedCards;
     if (card1.dataset.cardValue === card2.dataset.cardValue) {
         matchedCards.push(card1, card2);
-        if (matchedCards.length === cards.length) {
-            setTimeout(() => alert("Parabéns, você venceu o jogo!"), 200);
+        if (matchedCards.length === (numToChoose * 2)) {
+            swal.fire({
+                icon: "success",
+                title: "Parabéns, você venceu o jogo!",
+                text: "Deseja iniciar outro jogo?",
+                showCancelButton: true,
+                cancelButtonText: "Não",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sim",
+                confirmButtonColor: "#3085d6",
+            })
+                .then((result) => {
+                    if (result.value) {
+                        createGame(8)
+                    }
+                })
         }
-    } else {
-        card1.classList.remove("flipped");
-        card2.classList.remove("flipped");
     }
-    flippedCards = [];
 }

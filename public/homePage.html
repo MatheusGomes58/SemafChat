@@ -81,11 +81,11 @@
         <form class="modal-form">
           <label for="chatName">Nome do Chat:</label>
           <input type="text" id="chatName" placeholder="Chat" required>
-          <label for="chatName">Lista de Membros:</label>
+          <label for="chatName" id="labelFromNewChat">Lista de Membros:</label>
           <div id="userFields">
           </div>
           <div class="modal-row">
-            <button class="button" type="button" onclick="addUserField()"><img src="./IMG/addUser.png"></button>
+            <button class="button" type="button" id="buttonFromADDUser" onclick="addUserField()"><img src="./IMG/addUser.png"></button>
             <button class="button" type="button" onclick="createChat()"><img src="./IMG/saveFile.png"></button>
             <button class="button" type="button" onclick="closeCreateChatModal()"><img src="./IMG/close.png"></button>
           </div>

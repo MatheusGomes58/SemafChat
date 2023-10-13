@@ -84,7 +84,7 @@ function renderPosts(postList) {
 
         postElement.className = "post";
         postElement.innerHTML = `
-            <div class="user-info"onclick="copyEmailToClipboard('${emailPost}')">${userPost}</div>
+            <div class="user-info"onclick="generateChatEmail('${emailPost}','${userPost}')">${userPost}</div>
             <p>${processedPostText}</p>
             <div class="post-info">
                 <div class="time">${dateOfPost} ${timeOfPost}</div>
@@ -102,7 +102,7 @@ postButton.addEventListener("click", () => {
     const postsRef = firebase.database().ref("posts");
     const post = postInput.value;
     var timeOfMessenger = "" + now.getHours().toString() + ":" + (now.getMinutes() < 10 ? "0" + now.getMinutes().toString() : now.getMinutes().toString());
-    var currentDate = (now.getDay() < 10 ? "0" + now.getDay().toString() : now.getDay().toString()) + "/" + (now.getMonth() < 10 ? "0" + now.getMonth().toString() : now.getMonth().toString()) +  "/" + now.getFullYear();
+    var currentDate = (now.getDay() < 10 ? "0" + now.getDay().toString() : now.getDay().toString()) + "/" + (now.getMonth() < 10 ? "0" + now.getMonth().toString() : now.getMonth().toString()) + "/" + now.getFullYear();
 
     if (post !== '') {
         postsRef.orderByChild("emailPost").equalTo(email).once("value", (snapshot) => {
@@ -145,12 +145,24 @@ postButton.addEventListener("click", () => {
 });
 
 
-function copyEmailToClipboard(email) {
-    const tempInput = document.createElement("input");
-    tempInput.value = email;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
-    alert(`Email "${email}" copiado para a área de transferência.`);
+function generateChatEmail(emailFriend, nameFriend) {
+    const modal = document.getElementById("createChatModal");
+    const chatNameInput = document.getElementById("chatName");
+    document.getElementById("userFields").innerHTML = "";
+    document.getElementById("labelFromNewChat").style.display = "none";
+    document.getElementById("buttonFromADDUser").style.display = "none";
+    chatNameInput.value = "Chat do " + userData + " e do " + nameFriend;
+
+    const userFieldsDiv = document.getElementById("userFieldsUpdate");
+    const newUserField = document.createElement("input");
+    newUserField.type = "text";
+    newUserField.placeholder = "Email do usuário";
+    newUserField.name = "user";
+    newUserField.value = emailFriend;
+    newUserField.hidden = true;
+    userFieldsDiv.appendChild(newUserField);
+
+
+    // Exibir o modal
+    modal.style.display = "block";
 }

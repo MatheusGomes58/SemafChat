@@ -15,14 +15,16 @@ function searchChats() {
       });
     })
     .catch((error) => {
-      console.error("Erro ao buscar chats do usuário:", error);
-    });
-
+      swal.fire({
+        icon: "error",
+        title: "Erro ao buscar chats do usuário",
+        text: error
+      })
+    })
 }
 
 function findUltimateMessanger(chat, chatId, lastMessageID) {
   if (!lastMessageID) {
-    console.error("ID da última mensagem não fornecido.");
     chatsData.push({
       name: chat,
       uid: chatId
@@ -50,7 +52,11 @@ function findUltimateMessanger(chat, chatId, lastMessageID) {
         renderChats(chatsData);
       })
       .catch((error) => {
-        console.error("Erro ao buscar a última mensagem:", error);
+        swal.fire({
+          icon: "error",
+          title: "Erro ao buscar a última mensagem",
+          text: error
+        })
         chatsData.push({
           name: chat,
           uid: chatId
@@ -66,9 +72,9 @@ function findUltimateMessanger(chat, chatId, lastMessageID) {
 function search() {
   var page = document.querySelector(".active")
   const searchInput = document.getElementById("searchInput");
-  const searchTerm = searchInput.value.trim(); 
+  const searchTerm = searchInput.value.trim();
 
-  if(page.innerHTML == "Conversas"){
+  if (page.innerHTML == "Conversas") {
     if (searchTerm !== "") {
       const filteredChats = chatsData.filter(chat => {
         return chat.name.includes(searchTerm);
@@ -77,14 +83,14 @@ function search() {
     } else {
       renderChats(chatsData);
     }
-  }else if(page.innerHTML == "Atualizações"){
+  } else if (page.innerHTML == "Atualizações") {
     postsContainer.innerHTML = "";
     if (searchTerm !== "") {
       const filteredPost = listaDePosts.filter(post => {
         return post.userPost.includes(searchTerm) || post.postText.includes(searchTerm);
       });
       renderPosts(filteredPost);
-    }else{   
+    } else {
       renderPosts(listaDePosts);
     }
   }
@@ -125,11 +131,11 @@ menuLinks.forEach((link) => {
   });
 });
 
-function openWordUndefined(){
+function openWordUndefined() {
   window.location.href = "wordUndefined.html";
 }
 
-function openGameMemory(){
+function openGameMemory() {
   window.location.href = "gameMemory.html";
 }
 

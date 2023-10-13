@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
     keyboardButtons.forEach((button) => {
         button.addEventListener("click", function () {
             const content = button.value;
-            console.log(content)
             if (content == "-") {
                 inputField.value = inputField.value.slice(0, -1);
             } else if (content == "+") {

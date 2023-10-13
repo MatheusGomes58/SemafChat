@@ -55,6 +55,8 @@ function openUpdateChatModal(chatName) {
 function closeCreateChatModal() {
     const modal = document.getElementById("createChatModal");
     modal.style.display = "none";
+    document.getElementById("labelFromNewChat").style.display = "flex";
+    document.getElementById("buttonFromADDUser").style.display = "flex";
 }
 
 function closeUpdateChatModal() {
@@ -95,7 +97,11 @@ function createChat() {
     // e uma variável 'users' para a lista de usuários
 
     if (!chatName.trim() || !users.some(user => user.trim() !== "" && user !== email.trim())) {
-        alert("Por favor, preencha o nome do chat e insira pelo menos um usuário diferente do seu próprio email.");
+        swal.fire({
+            icon: "warning",
+            title: "Dados Inválidos",
+            text: "Por favor, insira pelo menos um usuário diferente do seu próprio email e que não seja vazio e um nome para sua sala de bate-papo."
+        })
         return;
     }
 
@@ -106,12 +112,18 @@ function createChat() {
         user: users,
     })
         .then(function (docRef) {
-            console.log("Chat criado com ID: ", docRef.id);
+            swal.fire({
+                icon: "success",
+                title: "Chat criado com sucesso",
+            })
             closeCreateChatModal();
             searchChats();
         })
         .catch(function (error) {
-            console.error("Erro ao criar chat: ", error);
+            swal.fire({
+                icon: "error",
+                title: "Erro ao criar chat",
+            })
             searchChats();
         });
 }
@@ -122,7 +134,11 @@ function updateChatUsers() {
     const users = Array.from(userInputs).map(input => input.value.trim().toLowerCase());
 
     if (!chatName.trim() || !users.some(user => user.trim() !== "" && user !== email.trim())) {
-        alert("Por favor, insira pelo menos um usuário diferente do seu próprio email e que não seja vazio.");
+        swal.fire({
+            icon: "warning",
+            title: "Usuário Inválido",
+            text: "Por favor, insira pelo menos um usuário diferente do seu próprio email e que não seja vazio."
+        })
         return;
     }
 
