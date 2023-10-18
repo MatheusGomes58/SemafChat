@@ -12,25 +12,6 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ],
-    "env": {
-      "API_KEY": "sua_chave_api",
-      "DATABASE_URL": "https://sua-database.firebaseio.com"
-    }
-  },
-  "functions": [
-    {
-      "source": "functions",
-      "codebase": "default",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log"
-      ],
-      "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run lint"
-      ]
-    }
-  ]
+    ]
+  }
 }

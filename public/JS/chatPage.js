@@ -15,6 +15,7 @@ function enviarMensagem() {
         const novaMensagem = {
             mensagem: mensagem,
             user: userData,
+            userKeyboardData: userKeyboardData,
             timestamp: timeOfMessenger
         };
 
@@ -43,7 +44,7 @@ function exibirMensagens() {
     
     messagesRef.on('child_added', (snapshot) => {
         const mensagem = snapshot.val();
-        createMenssager(mensagem.mensagem, mensagem.user, mensagem.timestamp);
+        createMenssager(mensagem.mensagem, mensagem.user, mensagem.userKeyboardData, mensagem.timestamp);
         
         // Após adicionar a mensagem, role para a parte inferior
         scrollChatToBottom();

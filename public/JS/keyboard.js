@@ -55,24 +55,6 @@ function randonKeys() {
     shuffleKeys(userRandonKeys);
 }
 
-//interpreta as teclas
-document.addEventListener("DOMContentLoaded", function () {
-    const inputField = document.getElementById("insertMessenger");
-    const keyboardButtons = document.querySelectorAll("button");
-    keyboardButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-            const content = button.value;
-            if (content == "-") {
-                inputField.value = inputField.value.slice(0, -1);
-            } else if (content == "+") {
-                //execução de envio da mensagem
-            } else {
-                inputField.value += content;
-            }
-        });
-    });
-});
-
 //renderiza as teclas
 function renderKeys() {
     const keyboardButtons = document.querySelectorAll("button");

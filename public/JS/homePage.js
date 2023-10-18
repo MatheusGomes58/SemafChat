@@ -45,7 +45,8 @@ function findUltimateMessanger(chat, chatId, lastMessageID) {
               name: chat,
               uid: chatId,
               lastMessage: mensagem.mensagem,
-              lastMessageTime: mensagem.timestamp
+              lastMessageTime: mensagem.timestamp,
+              userKeyboardData: mensagem.userKeyboardData
             });
           });
         }

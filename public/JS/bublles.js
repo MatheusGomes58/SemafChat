@@ -1,4 +1,4 @@
-function createMenssager(text, user, hour) {
+function createMenssager(text, user, userKeyboardDataMensager, hour) {
     var sendedMensager = "";
     var usuario = "";
     if (user == userData) {
@@ -7,6 +7,28 @@ function createMenssager(text, user, hour) {
     } else {
         sendedMensager = "you"
         usuario = user + ":";
+    }
+
+    var typeOfKeyboardUser = ""
+    switch (userKeyboardDataMensager) {
+        case "databaseKeyboardBraile":
+            typeOfKeyboardUser = databaseKeyboardBraile;
+            break;
+        case "databaseKeyboardSemaforico":
+            typeOfKeyboardUser = databaseKeyboardSemaforico;
+            break;
+        case "databaseKeyboardNormal":
+            typeOfKeyboardUser = databaseKeyboardNormal;
+            break;
+        case "databaseKeyboardLibras":
+            typeOfKeyboardUser = databaseKeyboardLibras;
+            break;
+        case "databaseKeyboardMorse":
+            typeOfKeyboardUser = databaseKeyboardMorse;
+            break;
+        default:
+            typeOfKeyboardUser = databaseKeyboardNormal;
+            break;
     }
 
     const chatContainer = document.querySelector('.chat-messages');
@@ -28,14 +50,14 @@ function createMenssager(text, user, hour) {
         const character = text[i];
         if (letterToImage.hasOwnProperty(character)) {
             const imageElement = document.createElement('img');
-            imageElement.src = typeOfKeyboard + letterToImage[character];
+            imageElement.src = typeOfKeyboardUser + letterToImage[character];
             imageElement.classList.add('sizeOfImage');
 
             // Verificar se o caractere é numérico
             if (!isNaN(character) && character.trim() !== "") {
                 // Adicione uma classe CSS diferente para caracteres numéricos
                 imageElement.classList.add('number');
-            }            
+            }
 
             messageTextElement.appendChild(imageElement);
         }

@@ -50,13 +50,36 @@ function renderChats(chats) {
         const chatName = document.createElement("h3");
         chatName.textContent = chat.name;
 
+        console.log(chat.userKeyboardData)
+
+        var typeOfKeyboardUser = ""
+        switch (chat.userKeyboardData) {
+            case "databaseKeyboardBraile":
+                typeOfKeyboardUser = databaseKeyboardBraile;
+                break;
+            case "databaseKeyboardSemaforico":
+                typeOfKeyboardUser = databaseKeyboardSemaforico;
+                break;
+            case "databaseKeyboardNormal":
+                typeOfKeyboardUser = databaseKeyboardNormal;
+                break;
+            case "databaseKeyboardLibras":
+                typeOfKeyboardUser = databaseKeyboardLibras;
+                break;
+            case "databaseKeyboardMorse":
+                typeOfKeyboardUser = databaseKeyboardMorse;
+                break;
+            default:
+                typeOfKeyboardUser = databaseKeyboardNormal;
+                break;
+        }
         const lastMessage = document.createElement("div");
         if (chat.lastMessage) {
             for (let i = 0; i < chat.lastMessage.length; i++) {
                 const character = chat.lastMessage[i];
                 if (letterToImage.hasOwnProperty(character)) {
                     const imageElement = document.createElement('img');
-                    imageElement.src = typeOfKeyboard + letterToImage[character];
+                    imageElement.src = typeOfKeyboardUser + letterToImage[character];
                     imageElement.classList.add('sizeOfImage');
 
                     // Verificar se o caractere é numérico
