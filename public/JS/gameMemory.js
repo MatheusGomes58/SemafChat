@@ -72,7 +72,7 @@ function flipCard(event) {
                     const back = flippedCard.querySelector(".card-back");
                     front.classList.toggle("hidden");
                     back.classList.toggle("hidden");
-                }); 
+                });
                 checkMatch()
                 flippedCards = [];
             }, 1000);
@@ -93,21 +93,9 @@ function checkMatch() {
     if (card1.dataset.cardValue === card2.dataset.cardValue) {
         matchedCards.push(card1, card2);
         if (matchedCards.length === (numToChoose * 2)) {
-            swal.fire({
-                icon: "success",
-                title: "Parabéns, você venceu o jogo!",
-                text: "Deseja iniciar outro jogo?",
-                showCancelButton: true,
-                cancelButtonText: "Não",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sim",
-                confirmButtonColor: "#3085d6",
-            })
-                .then((result) => {
-                    if (result.value) {
-                        createGame(8)
-                    }
-                })
+            if (confirm("Parabéns, você venceu o jogo! Deseja iniciar outro jogo?")) {
+                createGame(8);
+            }
         }
     }
 }

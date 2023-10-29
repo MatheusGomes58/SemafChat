@@ -21,20 +21,16 @@ function login() {
       // Verificar se o e-mail foi confirmado
       if (user.emailVerified) {
         // Usuário confirmou o e-mail, redirecione para a página principal
-        swal.fire({
-          icon: "success",
-          title: "Login realizado com sucesso",
-        }).then(() => {
-          setTimeout(() => {
-            window.location.replace("./homePage.html");
-          }, 1000);
-        });
+        alert("Login realizado com sucesso.");
+
+        // Aguarde 1000 milissegundos (1 segundo) antes de redirecionar
+        setTimeout(function () {
+          window.location.replace("./homePage.html");
+        }, 1000);
+
       } else {
         // E-mail não foi confirmado
-        swal.fire({
-          icon: "error",
-          title: "E-mail não confirmado. Verifique sua caixa de entrada para o link de confirmação.",
-        });
+        alert("E-mail não confirmado. Verifique sua caixa de entrada para o link de confirmação.");
         // Deslogar o usuário
         firebase.auth().signOut();
       }
@@ -44,28 +40,16 @@ function login() {
       const errorCode = error.code;
       switch (errorCode) {
         case "auth/wrong-password":
-          swal.fire({
-            icon: "error",
-            title: "Senha inválida",
-          });
+          alert("Usuário e Senha inválidos");
           break;
         case "auth/invalid-email":
-          swal.fire({
-            icon: "error",
-            title: "E-mail inválido",
-          });
+          alert("E-mail inválido.");
           break;
         case "auth/user-not-found":
-          swal.fire({
-            icon: "warning",
-            title: "Usuário não encontrado",
-          });
+          alert("Usuário e Senha inválidos");
           break;
         default:
-          swal.fire({
-            icon: "error",
-            title: error.message,
-          });
+          alert(error.message);
       }
     });
 }
@@ -89,16 +73,13 @@ function getUser() {
         }
         getUserInfo()
       } else {
-        swal
-          .fire({
-            icon: "success",
-            title: "Redirecionando para a tela de autenticação",
-          })
-          .then(() => {
-            setTimeout(() => {
-              window.location.replace("./index.html")
-            }, 1000)
-          })
+        alert("Redirecionando para a tela de autenticação.");
+
+        // Aguarde 1000 milissegundos (1 segundo) antes de redirecionar
+        setTimeout(function () {
+          window.location.replace("./index.html");
+        }, 1000);
+
       }
     })
   }
@@ -162,11 +143,7 @@ function updateUser() {
   const userRef = db.collection("users").doc(userId);
 
   if (!emailInput.value || !userDataInput.value || !userKeyboardDataInput.value) {
-    swal.fire({
-      icon: "warning",
-      title: "Por favor, preencha todos os campos.",
-    })
-    return;
+    alert("Por favor, preencha todos os campos.")
   }
 
   // Converta o email para letras minúsculas
@@ -187,16 +164,9 @@ function updateUser() {
       getUserInfo()
       searchChats()
       closeUpdateUserModal()
-      swal.fire({
-        icon: "success",
-        title: "Dados do usuário atualizado com sucesso.",
-      })
+      alert("Dados do usuário atualizado com sucesso.")
     })
     .catch((error) => {
-      swal.fire({
-        icon: "warning",
-        title: "Erro ao atualizar os dados do usuário",
-        text: error
-      })
+      alert("Erro ao atualizar os dados do usuário")
     });
 }

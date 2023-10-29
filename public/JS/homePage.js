@@ -15,11 +15,7 @@ function searchChats() {
       });
     })
     .catch((error) => {
-      swal.fire({
-        icon: "error",
-        title: "Erro ao buscar chats do usuário",
-        text: error
-      })
+      alert("Erro ao buscar chats do usuário:\n" + error);
     })
 }
 
@@ -53,11 +49,7 @@ function findUltimateMessanger(chat, chatId, lastMessageID) {
         renderChats(chatsData);
       })
       .catch((error) => {
-        swal.fire({
-          icon: "error",
-          title: "Erro ao buscar a última mensagem",
-          text: error
-        })
+        alert("Erro ao buscar a última mensagem:\n" + error);
         chatsData.push({
           name: chat,
           uid: chatId

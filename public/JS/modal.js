@@ -97,11 +97,7 @@ function createChat() {
     // e uma variável 'users' para a lista de usuários
 
     if (!chatName.trim() || !users.some(user => user.trim() !== "" && user !== email.trim())) {
-        swal.fire({
-            icon: "warning",
-            title: "Dados Inválidos",
-            text: "Por favor, insira pelo menos um usuário diferente do seu próprio email e que não seja vazio e um nome para sua sala de bate-papo."
-        })
+        alert("Dados Inválidos: Por favor, insira pelo menos um usuário diferente do seu próprio email e que não seja vazio, e um nome para sua sala de bate-papo.");
         return;
     }
 
@@ -112,18 +108,12 @@ function createChat() {
         user: users,
     })
         .then(function (docRef) {
-            swal.fire({
-                icon: "success",
-                title: "Chat criado com sucesso",
-            })
+            alert("Chat criado com sucesso")
             closeCreateChatModal();
             searchChats();
         })
         .catch(function (error) {
-            swal.fire({
-                icon: "error",
-                title: "Erro ao criar chat",
-            })
+            alert("Erro ao criar chat")
             searchChats();
         });
 }
@@ -134,11 +124,7 @@ function updateChatUsers() {
     const users = Array.from(userInputs).map(input => input.value.trim().toLowerCase());
 
     if (!chatName.trim() || !users.some(user => user.trim() !== "" && user !== email.trim())) {
-        swal.fire({
-            icon: "warning",
-            title: "Usuário Inválido",
-            text: "Por favor, insira pelo menos um usuário diferente do seu próprio email e que não seja vazio."
-        })
+        alert("Por favor, insira pelo menos um usuário diferente do seu próprio email e que não seja vazio.")
         return;
     }
 
@@ -159,11 +145,7 @@ function updateChatUsers() {
             }
         })
         .then(() => {
-            swal.fire({
-                icon: "success",
-                title: "Alteração salva com sucesso!",
-                text: "A lista de usuários do chat foi atualizada."
-            })
+            alert("A lista de usuários do chat foi atualizada.")
             closeUpdateChatModal();
         })
         .catch(error => {
@@ -173,65 +155,47 @@ function updateChatUsers() {
 
 function deleteChat() {
     const chatName = document.getElementById("chatNameUpdate").value;
-    swal.fire({
-        icon: "warning",
-        title: `Tem certeza de que deseja sair do chat "${chatName}"?`,
-        text: "Deseja realmente sair do chat?",
-        showCancelButton: true,
-        cancelButtonText: "Não",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sim",
-        confirmButtonColor: "#3085d6",
-    }).then((result) => {
-        if (result.value) {
-            // Continue com a remoção do usuário do chat
-            db.collection("chats").where("chat", "==", chatName)
-                .get()
-                .then(querySnapshot => {
-                    if (!querySnapshot.empty) {
-                        // Vamos assumir que só há um chat correspondente, então pegamos o primeiro
-                        const chatDoc = querySnapshot.docs[0];
-
-                        // Verifique se a propriedade "users" existe no documento do chat
-                        if (chatDoc.exists && chatDoc.data().user) {
-                            // Atualize o array de usuários do chat para remover o email
-                            const users = chatDoc.data().user;
-                            const updatedUsers = users.filter(user => user !== email);
-
-                            if (updatedUsers.length === 1) {
-                                // Se houver apenas um usuário, atualize para uma lista vazia
-                                return chatDoc.ref.update({ user: [] });
-                            }
-                            else {
-                                // Caso contrário, atualize para a lista filtrada
-                                return chatDoc.ref.update({ user: updatedUsers });
-                            }
+    if (confirm(`Tem certeza de que você deseja relmente sair do chat "${chatName}"?`)) {
+        // Continue com a remoção do usuário do chat
+        db.collection("chats").where("chat", "==", chatName)
+            .get()
+            .then(querySnapshot => {
+                if (!querySnapshot.empty) {
+                    // Vamos assumir que só há um chat correspondente, então pegamos o primeiro
+                    const chatDoc = querySnapshot.docs[0];
+    
+                    // Verifique se a propriedade "users" existe no documento do chat
+                    if (chatDoc.exists && chatDoc.data().user) {
+                        // Atualize o array de usuários do chat para remover o email
+                        const users = chatDoc.data().user;
+                        const updatedUsers = users.filter(user => user !== email);
+    
+                        if (updatedUsers.length === 1) {
+                            // Se houver apenas um usuário, atualize para uma lista vazia
+                            return chatDoc.ref.update({ user: [] });
                         }
                         else {
-                            throw new Error("Estrutura de dados do chat inválida ou propriedade 'user' não encontrada");
+                            // Caso contrário, atualize para a lista filtrada
+                            return chatDoc.ref.update({ user: updatedUsers });
                         }
-                    } else {
-                        throw new Error("Chat não encontrado no Firestore");
                     }
-                })
-                .then(() => {
-                    swal.fire({
-                        icon: "success",
-                        title: "Você saiu do chat com sucesso!",
-                        text: "Os dados do chat foram deletados do seu usuário."
-                    })
-                    searchChats();
-                    closeUpdateChatModal();
-                })
-                .catch(error => {
-                    swal.fire({
-                        icon: "error",
-                        title: "Erro ao remover usuário do chat!",
-                        text: error
-                    })
-                }); searchChats();
-        }
-    })
+                    else {
+                        throw new Error("Estrutura de dados do chat inválida ou propriedade 'user' não encontrada");
+                    }
+                } else {
+                    throw a Error("Chat não encontrado no Firestore");
+                }
+            })
+            .then(() => {
+                alert("Você saiu do chat com sucesso! Os dados do chat foram deletados do seu usuário.");
+                searchChats();
+                closeUpdateChatModal();
+            })
+            .catch(error => {
+                alert("Erro ao remover usuário do chat!\n" + error);
+            });
+        searchChats();
+    }   
 
 }
 

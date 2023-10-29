@@ -100,19 +100,13 @@ function processInput() {
                 }
 
                 if (tentativasRestantes <= 0) {
-                    swal.fire({
-                        icon: "error",
-                        title: "Você perdeu!",
-                        text: "A palavra era " + palavraSelecionada + ". Pressione qualquer tecla para iniciar outro jogo."
-                    })
+                    alert("Você perdeu!\nA palavra era " + palavraSelecionada + ".\nPressione qualquer tecla para iniciar outro jogo.");
+
                 }
 
                 if (!palavraOculta.includes("_")) {
-                    swal.fire({
-                        icon: "error",
-                        title: "Parabéns! Você ganhou!",
-                        text: `Pressione qualquer tecla para iniciar outro jogo.`
-                    })
+                    alert("Parabéns! Você ganhou!\nPressione qualquer tecla para iniciar outro jogo.");
+
                 }
 
                 displayWord();

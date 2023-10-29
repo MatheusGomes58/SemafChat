@@ -30,47 +30,30 @@ function UserPassword() {
   if (customerEmail !== "") {
     addUser()
     firebase.auth().signInWithEmailAndPassword(customerEmail, CustomerPassword).then(() => {
-      swal.fire({
-        icon: "success",
-        title: "Usuário já cadastrado",
-      }).then(() => {
-        setTimeout(() => {
-          window.location.replace("./index.html")
-        }, 1000)
-      })
+      alert("Usuário já cadastrado.");
+
+      // Aguarda 1000 milissegundos (1 segundo) antes de redirecionar
+      setTimeout(function () {
+        window.location.replace("./index.html");
+      }, 1000);
+
     }).catch((error) => {
       const errorCode = error.code
       switch (errorCode) {
         case "auth/user-not-found":
-          swal
-            .fire({
-              icon: "warning",
-              title: "Usuário não encontrado",
-              text: "Deseja criar esse usuário?",
-              showCancelButton: true,
-              cancelButtonText: "Não",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Sim",
-              confirmButtonColor: "#3085d6",
-            })
-            .then((result) => {
-              if (result.value) {
-                signUp()
-              }
-            })
+          var userNotFound = confirm("Usuário não encontrado. Deseja criar esse usuário?");
+
+          if (userNotFound) {
+            signUp();
+          }
+
           break
         default:
-          swal.fire({
-            icon: "error",
-            title: error.message,
-          })
+          alert(error.message)
       }
     })
   } else {
-    swal.fire({
-      icon: "error",
-      title: "Por favor insira um email",
-    })
+    alert("Por favor insira um email")
   }
 }
 
@@ -82,37 +65,27 @@ function signUp() {
       // Enviar email de verificação
       user.sendEmailVerification()
         .then(() => {
-          swal.fire({
-            icon: "success",
-            title: "Usuário foi criado com sucesso. Verifique seu email para ativar sua conta."
-          }).then(() => {
-            setTimeout(() => {
-              window.location.replace("./index.html");
-            }, 1000);
-          });
+          alert("Usuário foi criado com sucesso. Verifique seu email para ativar sua conta.");
+
+          // Aguarde 1000 milissegundos (1 segundo) antes de redirecionar
+          setTimeout(function () {
+            window.location.replace("./index.html");
+          }, 1000);
+
         })
         .catch((error) => {
-          swal.fire({
-            icon: "error",
-            title: "Erro ao enviar o email de verificação.",
-            text: error.message
-          });
+          alert("Erro ao enviar o email de verificação:\n" + error.message);
+
         });
     })
     .catch((error) => {
       const errorCode = error.code;
       switch (errorCode) {
         case "auth/weak-CustomerPassword":
-          swal.fire({
-            icon: "error",
-            title: "Senha muito fraca"
-          });
+          alert("Senha muito fraca");
           break;
         default:
-          swal.fire({
-            icon: "error",
-            title: error.message
-          });
+          alert(error.message);
       }
     });
 }

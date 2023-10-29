@@ -57,28 +57,11 @@ function verificarAdivinhacao() {
     const guess = document.getElementById("insertKeys").value.toUpperCase();
 
     if (guess === palavraSecreta) {
-        swal.fire({
-            icon: "success",
-            title: "Parabéns! Você acertou a palavra!",
-            text: "Deseja iniciar outro jogo?",
-            showCancelButton: true,
-            cancelButtonText: "Não",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sim",
-            confirmButtonColor: "#3085d6",
-        })
-            .then((result) => {
-                console.log(result)
-                if (result.value) {
-                    createGame()
-                }
-            })
+        if (confirm("Parabéns! Você acertou a palavra!\nDeseja iniciar outro jogo?")) {
+            createGame();
+        }
     } else {
-        swal.fire({
-            icon: "error",
-            title: "Tente novamente.",
-            text: "A palavra está incorreta."
-        })
+        alert("Tente novamente.\nA palavra está incorreta.");
     }
 }
 
