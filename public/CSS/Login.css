@@ -16,21 +16,22 @@ body {
 
 .container {
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
   border-radius: 10px;
   backdrop-filter: blur(10px);
-  width: 100%; /* Largura máxima da tela */
+  width: 100%;
 }
 
 #login-box {
   background-color: #fff;
-  border-radius: 30px;
+  border-radius: 10px;
   box-shadow: 0px 0px 10px #888;
   padding: 20px;
-  max-width: 80%;
-  max-height: 80%;
-  width: 100%;
-  height: 100%;
+  max-width: 400px;
+  max-height: 600px;
+  min-width: 200px;
+  min-height: 300px;
+  width: auto;
+  height: auto;
   size: auto;
   overflow: hidden;
   display: flex;
@@ -69,6 +70,7 @@ body {
   cursor: pointer;
   font-size: 16px;
   display: inline-block;
+  border: none;
 }
 
 #login-box input[type="submit"]:hover {
@@ -87,19 +89,17 @@ a.link {
 }
 
 .img-container{
+  min-width: 100%;
   padding: 10px;
-  max-width: 100%;
   height: auto;
-  display: flex;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 img{
-  min-width: 30%;
-  max-width: 40%;
+  min-width: 200px;
+  width: 20%;
   height: auto;
 }
 

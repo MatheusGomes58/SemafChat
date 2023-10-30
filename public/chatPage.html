@@ -3,24 +3,36 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
     <link rel="stylesheet" href="./CSS/chatPage.css">
     <link rel="stylesheet" href="./CSS/keyboard.css">
     <link rel="stylesheet" href="./CSS/bublles.css">
+    <link rel="stylesheet" href="./CSS/modalAdd.css">
+    <link rel="stylesheet" href="./CSS/postsPage.css">
     <title>Bate-Papo | CodeCipherChat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
 </head>
 
 <body class="container">
     <div class="chat-box">
+        <button onclick="backToHomePage()" class="botao-flutuante">
+            <i class="fas fa-times"></i>
+        </button>
         <div class="chat-messages"></div>
-        <div class="postsHeader">
-            <input type="text" id="insertKeys" placeholder="Type a message..." onclick="renderKeyboard(true,true)" readonly>
-            <button id="send-button" value="+" onclick="enviarMensagem()"><img src="./IMG/DatabaseOfKeyboard/libras/37.png" alt="+"></button>
-        </div>
-        <div id="keyboard">
-        </div>
     </div>
+    <div class="postsHeader">
+        <input type="text" id="insertKeys" placeholder="Type a message..." onclick="renderKeyboard(true,true)"
+            readonly>
+        <button class="button" value="+" onclick="enviarMensagem()"><img
+                src="./IMG/DatabaseOfKeyboard/libras/37.png" alt="+"></button>
+    </div>
+    <div id="keyboard">
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2005197481829740"
+        crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
@@ -31,6 +43,8 @@
     <script src="./JS/keyboard.js"></script>
     <script src="./JS/chatPage.js"></script>
     <script src="./JS/bublles.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2005197481829740"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

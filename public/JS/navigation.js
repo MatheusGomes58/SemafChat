@@ -13,15 +13,4 @@ function toggleSection(sectionId) {
     }
 }
 
-// Adicione um evento de clique a cada item de menu para alternar as seções
-const menuItems = document.querySelectorAll("nav ul li a");
-menuItems.forEach((menuItem) => {
-    menuItem.addEventListener("click", (event) => {
-        event.preventDefault(); // Impede a ação padrão do link
-        const sectionId = event.target.getAttribute("href").substring(1); // Obtém o ID da seção
-        toggleSection(sectionId);
-    });
-});
-
-// Inicialmente, exiba a primeira seção (Chats) como padrão
-toggleSection("chats");
+toggleSection('chats')

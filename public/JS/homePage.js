@@ -42,7 +42,8 @@ function findUltimateMessanger(chat, chatId, lastMessageID) {
               uid: chatId,
               lastMessage: mensagem.mensagem,
               lastMessageTime: mensagem.timestamp,
-              userKeyboardData: mensagem.userKeyboardData
+              userKeyboardData: mensagem.userKeyboardData,
+              user: mensagem.user
             });
           });
         }
@@ -106,23 +107,6 @@ updateUserModalButton.addEventListener("click", openUpdateUserModal);
 
 // Exemplo de array de chats
 const chatsData = [];
-
-
-// Captura todos os links dentro do menu
-const menuLinks = document.querySelectorAll('nav ul li a');
-
-// Adiciona um ouvinte de evento de clique a cada link
-menuLinks.forEach((link) => {
-  link.addEventListener('click', (event) => {
-    // Remove a classe "active" de todos os links
-    menuLinks.forEach((menuLink) => {
-      menuLink.classList.remove('active');
-    });
-    searchChats();
-    // Adiciona a classe "active" ao link clicado
-    event.target.classList.add('active');
-  });
-});
 
 function openWordUndefined() {
   window.location.href = "wordUndefined.html";

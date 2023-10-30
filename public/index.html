@@ -3,12 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Login | CodeCipherChat</title>
   <link rel="stylesheet" type="text/css" href="./CSS/login.css">
   <link rel="stylesheet" type="text/css" href="./CSS/chatPage.css">
   <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
-  <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
 </head>
 
@@ -17,6 +16,7 @@
     <div class="img-container">
       <img src="./IMG/LOGO.png">
     </div>
+    <label>Entrar no CodeCipher</label>
     <div class="form-container">
       <div class="form-row">
         <input type="email" id="email" name="email" placeholder="Email:" required>
@@ -25,8 +25,8 @@
         <input type="password" id="password" name="password" placeholder="Senha:" required>
       </div>
       <div class="form-row">
-        <input type="submit" value="Entrar" onclick="login()"> 
-          <a href="./recover.html" class="link">esqueci a senha<a></a>
+        <input type="submit" value="Entrar" onclick="login()">
+        <a href="./recover.html" class="link">esqueci a senha<a></a>
       </div>
       <div class="form-row">
         Não tem acesso? <a href="./register.html" class="link">o que fazer?<a>
@@ -37,8 +37,11 @@
   <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
   <script src="./JS/authFirebase.js"></script>
   <script src="./JS/userCredentials.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2005197481829740"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

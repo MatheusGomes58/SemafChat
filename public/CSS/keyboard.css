@@ -1,6 +1,7 @@
 .keyboard-container {
-    max-width: 90%;
-    max-height: auto;
+    max-width: 100%;
+    min-width: 200px;
+    height: auto;
     margin: 10px auto;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -8,7 +9,9 @@
     justify-content: center;
     align-items: center; /* Alinhe verticalmente no centro */
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 4; /* Garante que o botão fique acima dos outros componentes */
 }
 
 
@@ -114,13 +117,12 @@
 
 .sizeOfImage {
     width: 7%;
-    max-width: 40px; /* Tamanho máximo em pixels */
-    min-width: 30px;
+    max-width: 20px; /* Tamanho máximo em pixels */
+    min-width: 20px;
     height: auto; /* Mantém a proporção original */
     display: inline-block;
     border-radius: 10%;
     flex-shrink: 1;
-    position: relative;
 }
 
 .sizeOfImage.number {
@@ -128,10 +130,8 @@
 }
 
 .sizeOfImageWord {
-    width: 7%;
-    max-width: 40px; /* Tamanho máximo em pixels */
-    min-width: 30px;
-    height: auto; /* Mantém a proporção original */
+    max-width: 20px; /* Tamanho máximo em pixels */
+    min-width: 20px;
     display: inline-block;
     border-radius: 10%;
     flex-shrink: 1;
@@ -143,21 +143,23 @@
 
 
 .button {
-    background-color: orange;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 40px;
-    height: 40px; 
+    background-color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
     display: flex;
     margin: 5px;
     justify-content: center; /* Alinhe horizontalmente no centro */
     align-items: center; /* Alinhe verticalmente no centro */
     position: relative;
+    overflow: hidden; /* Ocultar o conteúdo que se estenderia além do botão */
+    transition: transform 0.2s; /* Adicionar uma transição suave para o efeito hover */
 }
 
 .button:hover {
-    background-color: rgb(145, 94, 1);
+    transform: scale(1.3); /* Aumentar o conteúdo interno do botão em 20% no hover */
 }
+
 
 .button img {
     max-width: 100%;
@@ -194,4 +196,61 @@
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); /* Centralize a imagem dentro da tecla */
+}
+
+
+.topic {
+    border: none;
+    background: none;
+    transition: transform 0.2s; /* Adicionar uma transição suave para o efeito hover */
+}
+
+.topic:hover {
+    transform: scale(1.3); /* Aumentar o conteúdo interno do botão em 20% no hover */
+}
+
+
+.botao-flutuante {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    z-index: 2; /* Garante que o botão fique acima dos outros componentes */
+    background-color: orange;
+    color: black;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%); /* Centraliza o botão no canto superior esquerdo */
+}
+
+.botao-flutuante:hover {
+    background-color: darkorange;
+    transform: translate(-50%, -50%) scale(1.1); /* Efeito de escala ao passar o mouse */
+}
+
+/* Adicione classes distintas para os botões adicionais */
+.botao-flutuante.secondary-1 {
+    top: 83%;
+    left: 40%;
+}
+
+.botao-flutuante.secondary-2 {
+    top: 87%;
+    left: 20%;
+}
+
+.botao-flutuante.secondary-3 {
+    top: 87%;
+    left: 80%;
+}
+
+.botao-flutuante.secondary-4 {
+    top: 83%;
+    left: 60%;
 }

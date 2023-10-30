@@ -116,7 +116,7 @@ function processInput() {
             inputLetter.value = "";
             message.textContent = "Pressione apenas 1 botão por vez!";
         }
-    } else if (tentativasRestantes === 0) {
+    } else if (tentativasRestantes === 0 || !palavraOculta.includes("_")) {
         randonWords()
     }
 }

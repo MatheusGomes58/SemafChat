@@ -1,7 +1,7 @@
 .chat-bubble {
     padding: 10px;
     margin: 5px;
-    border-radius: 30px; /* Cantos arredondados */
+    border-radius: 30px;
     clear: both;
     overflow: hidden;
 }
@@ -10,33 +10,42 @@
     background-color: #25D366;
     color: #fff;
     align-self: flex-start;
-    float: left; /* Alinha à esquerda */
+    float: left;
+    transition: transform 0.3s;
 }
+
 
 .me {
     background-color: orange;
     color: #fff;
     align-self: flex-end;
-    float: right; /* Alinha à direita */
+    float: right;
+    transition: transform 0.3s;
 }
+
+
 
 /* Adicione as regras CSS para a formatação do nome de usuário e timestamp */
 .message-info {
     margin-bottom: 5px;
     font-weight: bold;
+    z-index: 0;
 }
 
 .message-text {
     max-width: 100%;
+    z-index: 0;
 }
 
 .username {
     color: #000000;
     margin-right: 5px;
+    z-index: 0;
 }
 
 .timestamp {
     color: #323232;
     align-self: flex-end;
-    float: right; /* Alinha à direita */
+    float: right;
+    /* Alinha à direita */
 }

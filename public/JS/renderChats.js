@@ -23,7 +23,7 @@ function renderChats(chats) {
         chatItem.addEventListener("mousedown", () => {
             longPressTimer = setTimeout(() => {
                 openUpdateChatModal(chat.name)
-            }, 3000);
+            }, 2000);
         });
 
 
@@ -36,7 +36,7 @@ function renderChats(chats) {
         chatItem.addEventListener("touchstart", (e) => {
             longPressTimer = setTimeout(() => {
                 openUpdateChatModal(chat.name);
-            }, 3000);
+            }, 2000);
         });
 
         // Limpar o temporizador se o toque for liberado antes do long press
@@ -94,8 +94,13 @@ function renderChats(chats) {
             }
         }
 
+        const chatMenssager = document.createElement("p");
+        if(chat.user){
+            chatMenssager.innerHTML = chat.user + " : " + lastMessage.innerHTML;
+        }
+
         chatDetails.appendChild(chatName);
-        chatDetails.appendChild(lastMessage);
+        chatDetails.appendChild(chatMenssager);
 
         const chatInfo = document.createElement("div");
         chatInfo.classList.add("chat-info");

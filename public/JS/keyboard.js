@@ -202,3 +202,10 @@ function reimantChar() {
     }
 };
 
+function backToHomePage(){
+    // Aguarde 1000 milissegundos (1 segundo) antes de redirecionar
+    setTimeout(function () {
+        window.location.replace("./homePage.html");
+      }, 1000);
+}
+

@@ -1,15 +1,8 @@
 function createMenssager(text, user, userKeyboardDataMensager, hour) {
-    var sendedMensager = "";
-    var usuario = "";
-    if (user == userData) {
-        sendedMensager = "me"
-        usuario = "você:"
-    } else {
-        sendedMensager = "you"
-        usuario = user + ":";
-    }
+    var sendedMensager = (user == userData) ? "me" : "you";
+    var usuario = (user == userData) ? "você:" : user + ":";
+    var typeOfKeyboardUser = databaseKeyboardNormal;
 
-    var typeOfKeyboardUser = ""
     switch (userKeyboardDataMensager) {
         case "databaseKeyboardBraile":
             typeOfKeyboardUser = databaseKeyboardBraile;
@@ -26,26 +19,23 @@ function createMenssager(text, user, userKeyboardDataMensager, hour) {
         case "databaseKeyboardMorse":
             typeOfKeyboardUser = databaseKeyboardMorse;
             break;
-        default:
-            typeOfKeyboardUser = databaseKeyboardNormal;
-            break;
     }
 
     const chatContainer = document.querySelector('.chat-messages');
-
     const chatBubble = document.createElement('div');
     chatBubble.className = 'chat-bubble ' + sendedMensager;
 
     const messageInfo = document.createElement('div');
     messageInfo.className = 'message-info';
+
     const username = document.createElement('span');
     username.className = 'username';
     username.textContent = usuario;
+    messageInfo.appendChild(username);
 
     const messageTextElement = document.createElement('div');
     messageTextElement.className = 'message-text';
 
-    // Loop para criar elementos de imagem para cada caractere do texto
     for (let i = 0; i < text.length; i++) {
         const character = text[i];
         if (letterToImage.hasOwnProperty(character)) {
@@ -53,9 +43,7 @@ function createMenssager(text, user, userKeyboardDataMensager, hour) {
             imageElement.src = typeOfKeyboardUser + letterToImage[character];
             imageElement.classList.add('sizeOfImage');
 
-            // Verificar se o caractere é numérico
             if (!isNaN(character) && character.trim() !== "") {
-                // Adicione uma classe CSS diferente para caracteres numéricos
                 imageElement.classList.add('number');
             }
 
@@ -63,13 +51,9 @@ function createMenssager(text, user, userKeyboardDataMensager, hour) {
         }
     }
 
-
-
     const timestamp = document.createElement('div');
     timestamp.className = 'timestamp';
     timestamp.textContent = hour;
-
-    messageInfo.appendChild(username);
 
     chatBubble.appendChild(messageInfo);
     chatBubble.appendChild(messageTextElement);

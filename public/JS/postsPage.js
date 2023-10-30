@@ -11,22 +11,13 @@ function exibirPosts() {
 
     postsRef.on('value', (snapshot) => {
         postsContainer.innerHTML = "";
-        while (listaDePosts.length) {
-            listaDePosts.pop();
-        }
+        listaDePosts.length = 0; // Limpe a lista de posts de uma maneira mais eficiente
         const currentDate = now.getTime();
 
         snapshot.forEach((childSnapshot) => {
             const post = childSnapshot.val();
 
-            const postObj = {
-                userPost: post.userPost,
-                emailPost: post.emailPost,
-                postText: post.postText,
-                userKeyboardPost: post.userKeyboardPost,
-                timeOfPost: post.timeOfPost,
-                dateOfPost: post.dateOfPost
-            };
+            const postObj = { ...post }; // Copie os valores do post para um novo objeto
 
             listaDePosts.push(postObj);
         });
@@ -38,12 +29,13 @@ function exibirPosts() {
 
 function renderPosts(postList) {
     postList = postList.reverse(); // Invertendo a ordem dos posts
-    postList.forEach(post => {
+    postsContainer.innerHTML = postList.map(post => {
         const { userPost, emailPost, postText, userKeyboardPost, timeOfPost, dateOfPost } = post;
         const postElement = document.createElement("div");
 
         let processedPostText = '';
         var keyboardOfPost = "";
+
         switch (userKeyboardPost) {
             case "databaseKeyboardBraile":
                 keyboardOfPost = databaseKeyboardBraile;
@@ -84,25 +76,27 @@ function renderPosts(postList) {
 
         postElement.className = "post";
         postElement.innerHTML = `
-            <div class="user-info"onclick="generateChatEmail('${emailPost}','${userPost}')">${userPost}</div>
+            <div class="user-info" onclick="generateChatEmail('${emailPost}','${userPost}')">${userPost}</div>
             <p>${processedPostText}</p>
             <div class="post-info">
                 <div class="time">${dateOfPost} ${timeOfPost}</div>
             </div>
         `;
-        postsContainer.appendChild(postElement);
-    });
+        return postElement.outerHTML;
+    }).join('');
 
     // Após renderizar os posts, você pode redefinir a entrada e contador de caracteres, se necessário.
     postInput.value = "";
     charCount.textContent = 100;
 }
 
-postButton.addEventListener("click", () => {
+function publicar() {
     const postsRef = firebase.database().ref("posts");
     const post = postInput.value;
+    var dayOfMonth = now.getDate();
+    var currentDay = dayOfMonth <= 9 ? "0" + dayOfMonth : dayOfMonth.toString();
     var timeOfMessenger = "" + now.getHours().toString() + ":" + (now.getMinutes() < 10 ? "0" + now.getMinutes().toString() : now.getMinutes().toString());
-    var currentDate = (now.getDay() < 10 ? "0" + now.getDay().toString() : now.getDay().toString()) + "/" + (now.getMonth() < 10 ? "0" + now.getMonth().toString() : now.getMonth().toString()) + "/" + now.getFullYear();
+    var currentDate = currentDay + "/" + (now.getMonth() < 10 ? "0" + now.getMonth().toString() : now.getMonth().toString()) + "/" + now.getFullYear();
 
     if (post !== '') {
         postsRef.orderByChild("emailPost").equalTo(email).once("value", (snapshot) => {
@@ -142,10 +136,10 @@ postButton.addEventListener("click", () => {
             }
         });
     }
-});
-
+}
 
 function generateChatEmail(emailFriend, nameFriend) {
+    document.getElementById("closeAplication").style.display = "none";
     const modal = document.getElementById("createChatModal");
     const chatNameInput = document.getElementById("chatName");
     document.getElementById("userFields").innerHTML = "";
@@ -161,7 +155,6 @@ function generateChatEmail(emailFriend, nameFriend) {
     newUserField.value = emailFriend;
     newUserField.hidden = true;
     userFieldsDiv.appendChild(newUserField);
-
 
     // Exibir o modal
     modal.style.display = "block";

@@ -3,35 +3,28 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Tela Inicial | CodeCipherChat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <link href="./CSS/homePage.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="./CSS/homePage.css">
   <link rel="stylesheet" type="text/css" href="./CSS/postsPage.css">
   <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
   <link rel="stylesheet" type="text/css" href="./CSS/modal.css">
-  <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./CSS/modalAdd.css">
   <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
 </head>
 
 <body class="container">
+  <header>
+    <input type="text" id="searchInput" placeholder="Pesquisar...">
+    <div class="buttonAlign">
+      <button id="searchButton" class="button"><img src="./IMG/search.png"></button>
+      <button id="settingsButton" class="button"><img src="./IMG/set.png"></button>
+      <button id="createChatButton" class="button"><img src="./IMG/add.png"></button>
+    </div>
+  </header>
   <div id="home-box">
-    <header>
-      <input type="text" id="searchInput" placeholder="Pesquisar...">
-      <div class="buttonAlign">
-        <button class="button" id="searchButton" class="button"><img src="./IMG/search.png"></button>
-        <button class="button" id="settingsButton" class="button"><img src="./IMG/set.png"></button>
-        <button class="button" id="createChatButton" class="button"><img src="./IMG/add.png"></button>
-      </div>
-    </header>
-    <nav>
-      <ul>
-        <li><a href="#chats" class="active">Conversas</a></li>
-        <li><a href="#updates">Atualizações</a></li>
-        <li><a href="#minigames">Jogos</a></li>
-      </ul>
-    </nav>
-
     <main class="sections">
       <section id="chats">
         <p id="chatList" class="whatsapp-chat-list">
@@ -43,10 +36,10 @@
             onclick="renderKeyboard(true,true)" readonly>
           <div class="buttonAlign">
             <span id="char-count">100</span>
-            <button id="send-button" value="+"><img src="./IMG/DatabaseOfKeyboard/libras/37.png" alt="+"></button>
+            <button class="button" value="+" onclick="publicar()"><img src="./IMG/DatabaseOfKeyboard/libras/37.png"
+                alt="+"></button>
           </div>
         </div>
-        <div id="keyboard"></div>
         <div id="posts"></div>
       </section>
       <section id="minigames">
@@ -71,6 +64,9 @@
     </main>
 
     <div class="modal" id="createChatModal">
+      <button class="botao-flutuante" onclick="closeCreateChatModal()">
+        <i class="fas fa-times"></i>
+      </button>
       <div class="modal-content">
         <h2>Criar Novo Chat</h2>
         <form class="modal-form">
@@ -80,9 +76,9 @@
           <div id="userFields">
           </div>
           <div class="modal-row">
-            <button class="button" type="button" id="buttonFromADDUser" onclick="addUserField()"><img src="./IMG/addUser.png"></button>
+            <button class="button" type="button" id="buttonFromADDUser" onclick="addUserField()"><img
+                src="./IMG/addUser.png"></button>
             <button class="button" type="button" onclick="createChat()"><img src="./IMG/saveFile.png"></button>
-            <button class="button" type="button" onclick="closeCreateChatModal()"><img src="./IMG/close.png"></button>
           </div>
         </form>
       </div>
@@ -90,6 +86,9 @@
 
 
     <div class="modal" id="updateChatModal">
+      <button class="botao-flutuante" onclick="closeUpdateChatModal()">
+        <i class="fas fa-times"></i>
+      </button>
       <div class="modal-content">
         <h2>Editar Membros do Chat</h2>
         <form class="modal-form">
@@ -102,13 +101,15 @@
             <button class="button" type="button" onclick="addUserUpdateField()"><img src="./IMG/addUser.png"></button>
             <button class="button" type="button" onclick="updateChatUsers()"><img src="./IMG/changeFile.png"></button>
             <button class="button" type="button" onclick="deleteChat()"><img src="./IMG/delete.png"></button>
-            <button class="button" type="button" onclick="closeUpdateChatModal()"><img src="./IMG/close.png"></button>
           </div>
         </form>
       </div>
     </div>
 
     <div class="modal" id="updateUserModal">
+      <button class="botao-flutuante" onclick="closeUpdateUserModal()">
+        <i class="fas fa-times"></i>
+      </button>
       <div class="modal-content">
         <h2>Editar dados do Usuário</h2>
         <form class="modal-form">
@@ -136,26 +137,52 @@
           <div class="modal-row">
             <button class="button" type="button" onclick="updateUser()"><img src="./IMG/changeFile.png"></button>
             <button class="button" type="button" onclick="deleteChat()"><img src="./IMG/delete.png"></button>
-            <button class="button" type="button" onclick="logout()"><img src="./IMG/logout.png"></button>
-            <button class="button" type="button" onclick="closeUpdateUserModal()"><img src="./IMG/close.png"></button>
           </div>
         </form>
       </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
-    <script src="./JS/authFirebase.js"></script>
-    <script src="./JS/userCredentials.js"></script>
-    <script src="./JS/modal.js"></script>
-    <script src="./JS/navigation.js"></script>
-    <script src="./JS/renderChats.js"></script>
-    <script src="./JS/postsPage.js"></script>
-    <script src="./JS/keyboard.js"></script>
-    <script src="./JS/homePage.js"></script>
+    <div id="modal" class="modal">
+      <button class="botao-flutuante" id="closeModalButton" onclick="closeModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="modal-content">
+        <p>Este é o conteúdo do modal.</p>
+      </div>
+    </div>
+
+    <!-- Botões adicionais -->
+    <button onclick="toggleSection('chats')" class="botao-flutuante secondary-1">
+      <i class="fas fa-home"></i>
+    </button>
+    <button onclick="toggleSection('updates')" class="botao-flutuante secondary-2">
+      <i class="fas fa-sync"></i>
+    </button>
+    <button onclick="toggleSection('minigames')" class="botao-flutuante secondary-4">
+      <i class="fas fa-gamepad"></i>
+    </button>
+    <button id="closeAplication" class="botao-flutuante secondary-3" onclick="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+
+  </div>
+
+  <div id="keyboard"></div>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2005197481829740"
+    crossorigin="anonymous"></script>
+  <script src="./JS/authFirebase.js"></script>
+  <script src="./JS/userCredentials.js"></script>
+  <script src="./JS/modal.js"></script>
+  <script src="./JS/navigation.js"></script>
+  <script src="./JS/renderChats.js"></script>
+  <script src="./JS/postsPage.js"></script>
+  <script src="./JS/keyboard.js"></script>
+  <script src="./JS/homePage.js"></script>
 </body>
 
 </html>

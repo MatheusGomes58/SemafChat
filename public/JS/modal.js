@@ -163,13 +163,13 @@ function deleteChat() {
                 if (!querySnapshot.empty) {
                     // Vamos assumir que só há um chat correspondente, então pegamos o primeiro
                     const chatDoc = querySnapshot.docs[0];
-    
+
                     // Verifique se a propriedade "users" existe no documento do chat
                     if (chatDoc.exists && chatDoc.data().user) {
                         // Atualize o array de usuários do chat para remover o email
                         const users = chatDoc.data().user;
                         const updatedUsers = users.filter(user => user !== email);
-    
+
                         if (updatedUsers.length === 1) {
                             // Se houver apenas um usuário, atualize para uma lista vazia
                             return chatDoc.ref.update({ user: [] });
@@ -183,7 +183,7 @@ function deleteChat() {
                         throw new Error("Estrutura de dados do chat inválida ou propriedade 'user' não encontrada");
                     }
                 } else {
-                    throw a Error("Chat não encontrado no Firestore");
+                    throw new Error("Chat não encontrado no Firestore");
                 }
             })
             .then(() => {
@@ -195,7 +195,7 @@ function deleteChat() {
                 alert("Erro ao remover usuário do chat!\n" + error);
             });
         searchChats();
-    }   
+    }
 
 }
 
@@ -234,5 +234,37 @@ falseRadio.addEventListener("change", function () {
 });
 
 
+const modal = document.getElementById("modal");
+const closeModalButton = document.getElementById("closeModalButton");
+var modalTime = 2000;
 
+function openModal() {
+    closeModalButton.style.display = "none";
+    const numeroAleatorio = Math.floor(Math.random() * (20 - 2 + 1)) + 2;
+    console.log(numeroAleatorio)
+
+    modalTime = numeroAleatorio * 60000;
+    closeModalButton.style.display = "none";
+    modal.style.display = "block";
+
+    // Exibir o botão de fechar após 15 segundos
+    setTimeout(function () {
+        closeModalButton.style.display = "block";
+    }, 15000);
+
+    openAnotherModal();
+}
+
+function closeModal() {
+    modal.style.display = "none";
+    document.getElementById("closeAplication").style.display = "block";
+}
+
+function openAnotherModal() {
+    setTimeout(() => {
+        openModal();
+    }, modalTime);
+}
+
+closeModalButton.addEventListener("click", closeModal);
 

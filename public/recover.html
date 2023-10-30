@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recuperar | CodeCipherChat</title>
-    <link rel="stylesheet" type="text/css" href="./CSS/recover.css">
-    <link rel="stylesheet" type="text/css" href="./CSS/chatPage.css">
-    <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
-    <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
-  </head>
-  <body class="container">
-    <div id="recover-box">
-      <div class="img-container"> 
-        <img src="./IMG/LOGO.png" height="200px">
-      </div>
-    </br>
-      <input type="email" id="emailm" name="emailm" placeholder="E-mail:" required> 
-      <input type="submit" value="Recuperar" onclick="changePassword()">
-      <p>Tudo certo! <a href="./index.html" class="link">Desejo logar<a></p>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Recuperar | CodeCipherChat</title>
+  <link rel="stylesheet" type="text/css" href="./CSS/recover.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/chatPage.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
+  <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
+</head>
+
+<body class="container">
+  <div id="recover-box">
+    <div class="img-container">
+      <img src="./IMG/LOGO.png" height="200px">
     </div>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
-    <script src="./JS/authFirebase.js"></script>
-    <script src="./JS/recover.js"></script>
-  </body>
+    <label>Insira seu email para recuperar a sua conta.</label>
+    <div class="form-container">
+      <div class="form-row">
+        <input type="email" id="emailm" name="emailm" placeholder="E-mail:" required>
+      </div>
+      <div class="form-row">
+        <input type="submit" value="Recuperar" onclick="changePassword()">
+      </div>
+      <div class="form-row">
+        <p>Tudo certo! <a href="./index.html" class="link">Desejo logar<a></p>
+      </div>
+    </div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+  <script src="./JS/authFirebase.js"></script>
+  <script src="./JS/recover.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2005197481829740"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

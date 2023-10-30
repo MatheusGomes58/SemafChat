@@ -10,54 +10,100 @@ let userChat = "";
 var typeOfKeyboard = "";
 
 function login() {
+  // Verificar se o usuário já está autenticado em outro dispositivo
   const email = document.getElementById("email").value.toLowerCase();
   const password = document.getElementById("password").value;
 
-  // Realizar login com e-mail e senha
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
+  // Use o Firebase Realtime Database ou Firestore para verificar o status de autenticação
+  const authRef = firebase.database().ref('authenticated_users/' + email.replace(/[.#$\[\]]/g, ''));
 
-      // Verificar se o e-mail foi confirmado
-      if (user.emailVerified) {
-        // Usuário confirmou o e-mail, redirecione para a página principal
-        alert("Login realizado com sucesso.");
+  authRef.once('value').then((snapshot) => {
+    if (snapshot.val() === true) {
+      // O usuário já está autenticado em outro dispositivo
+      alert("O usuário já está autenticado em outro lugar.");
+    } else {
+      // O usuário não está autenticado em outro lugar, continue com o processo de login
+      // Realizar login com e-mail e senha
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
 
-        // Aguarde 1000 milissegundos (1 segundo) antes de redirecionar
-        setTimeout(function () {
-          window.location.replace("./homePage.html");
-        }, 1000);
+          // Marque o usuário como autenticado no banco de dados
+          authRef.set(true);
 
-      } else {
-        // E-mail não foi confirmado
-        alert("E-mail não confirmado. Verifique sua caixa de entrada para o link de confirmação.");
-        // Deslogar o usuário
-        firebase.auth().signOut();
-      }
-    })
-    .catch((error) => {
-      // Trate os erros de autenticação aqui
-      const errorCode = error.code;
-      switch (errorCode) {
-        case "auth/wrong-password":
-          alert("Usuário e Senha inválidos");
-          break;
-        case "auth/invalid-email":
-          alert("E-mail inválido.");
-          break;
-        case "auth/user-not-found":
-          alert("Usuário e Senha inválidos");
-          break;
-        default:
-          alert(error.message);
-      }
-    });
+          // Verificar se o e-mail foi confirmado
+          if (user.emailVerified) {
+            // Usuário confirmou o e-mail, redirecione para a página principal
+            alert("Login realizado com sucesso.");
+
+            // Aguarde 1000 milissegundos (1 segundo) antes de redirecionar
+            setTimeout(function () {
+              window.location.replace("./homePage.html");
+            }, 1000);
+
+          } else {
+            // E-mail não foi confirmado
+            alert("E-mail não confirmado. Verifique sua caixa de entrada para o link de confirmação.");
+            // Deslogar o usuário
+            firebase.auth().signOut();
+          }
+        })
+        .catch((error) => {
+          // Trate os erros de autenticação aqui
+          const errorCode = error.code;
+          switch (errorCode) {
+            case "auth/wrong-password":
+              alert("Usuário e Senha inválidos");
+              break;
+            case "auth/invalid-email":
+              alert("E-mail inválido.");
+              break;
+            case "auth/user-not-found":
+              alert("Usuário e Senha inválidos");
+              break;
+            default:
+              alert(error.message);
+          }
+        });
+    }
+  });
 }
+
+
 
 
 function logout() {
-  firebase.auth().signOut()
+  // Verificar se o usuário está autenticado
+  const user = firebase.auth().currentUser;
+  
+  if (user) {
+    const email = user.email;
+
+    // Realizar o logout
+    firebase.auth().signOut()
+      .then(() => {
+        // Remover o registro de autenticação no Firebase Realtime Database ou Firestore
+        const db = firebase.database(); // Substitua pelo seu banco de dados real ou Firestore
+        const authRef = firebase.database().ref('authenticated_users/' + email.replace(/[.#$\[\]]/g, ''));
+
+        authRef.remove()
+          .then(() => {
+            alert("Logout realizado com sucesso.");
+            // Redirecione para a página de login ou onde desejar
+            window.location.replace("./login.html");
+          })
+          .catch((error) => {
+            alert("Erro ao remover o registro de autenticação: " + error.message);
+          });
+      })
+      .catch((error) => {
+        alert("Erro ao fazer logout: " + error.message);
+      });
+  } else {
+    alert("Nenhum usuário autenticado.");
+  }
 }
+
 
 function getUser() {
   if (document.title != "Login | CodeCipherChat") {

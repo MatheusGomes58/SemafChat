@@ -3,18 +3,21 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Advinhação de Palavras | CodeCipherChat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <link href="./CSS/homePage.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="./CSS/homePage.css">
   <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
   <link rel="stylesheet" type="text/css" href="./CSS/undefinedWord.css">
-  <script src="./LIB/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
 </head>
 
 <body class="container">
   <div id="home-box">
+    <button onclick="backToHomePage()" class="botao-flutuante">
+      <i class="fas fa-times"></i>
+    </button>
     <input type="text" id="insertKeys" maxlength="1" hidden>
     <h1>Jogo de Adivinhação de Palavras</h1>
     <p>Adivinhe a palavra:</p>
@@ -33,6 +36,8 @@
   <script src="./JS/userCredentials.js"></script>
   <script src="./JS/keyboard.js"></script>
   <script src="./JS/undefinedWord.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2005197481829740"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

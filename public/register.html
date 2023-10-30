@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro | CodeCipherChat</title>
-    <link rel="stylesheet" type="text/css" href="./CSS/register.css">
-    <link rel="stylesheet" type="text/css" href="./CSS/chatPage.css">
-    <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
-    <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
-  </head>
-  <body class="container">
-    <div id="register-box">
-      <div class="img-container"> 
-        <img src="./IMG/LOGO.png" height="200px">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Cadastro | CodeCipherChat</title>
+  <link rel="stylesheet" type="text/css" href="./CSS/register.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/chatPage.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/keyboard.css">
+  <link rel="icon" type="image/png" href="./IMG/LOGO.png" />
+</head>
+
+<body class="container">
+  <div id="register-box">
+    <div class="img-container">
+      <img src="./IMG/LOGO.png" height="200px">
+    </div>
+    <h2>Criar uma nova conta</h2>
+    <label>É rápido e fácil.</label>
+    <div class="form-container">
+      <div class="form-row">
+        <input type="text" id="namec" name="namec" placeholder="Nome:" required>
       </div>
-    </br>
-      <input type="text" id="namec" name="namec" placeholder="Nome:" required>
-      <input type="email" id="emailc" name="emailc" placeholder="E-mail:" required> 
-      <input type="password" id="passwordc" name="passwordc" placeholder="Senha:" required>
-      <input type="submit" value="Cadastrar" onclick="UserPassword()">
-      <p>Já possuo login! <a href="./index.html" class="link">Desejo logar<a></p>
+      <div class="form-row">
+        <input type="email" id="emailc" name="emailc" placeholder="E-mail:" required>
+      </div>
+      <div class="form-row">
+        <input type="password" id="passwordc" name="passwordc" placeholder="Senha:" required>
+      </div>
+      <div class="form-row">
+        <input type="submit" value="Cadastrar" onclick="UserPassword()">
+      </div>
+      <div class="form-row">
+        <p>Já possuo login! <a href="./index.html" class="link">Desejo logar<a></p>
+      </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
@@ -27,5 +41,8 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
     <script src="./JS/authFirebase.js"></script>
     <script src="./JS/register.js"></script>
-  </body>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2005197481829740"
+      crossorigin="anonymous"></script>
+</body>
+
 </html>

@@ -10,36 +10,38 @@ body {
     justify-content: center;
     font-family: Arial, sans-serif;
     vertical-align: middle;
-    width: 100%; 
-    overflow: hidden; 
+    width: 100%;
+    overflow: auto;
+    flex-direction: column;
 }
 
 .container {
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    width: 100%; /* Largura máxima da tela */
+    width: 100%;
+    /* Largura máxima da tela */
 }
 
 .chat-box {
+    margin-top: 1%;
     background-color: #fff;
-    border-radius: 30px;
+    border-radius: 10px;
     box-shadow: 0px 0px 10px #888;
     padding: 20px;
-    max-width: 80%;
-    max-height: 80%;
-    width: 100%;
-    height: 100%;
-    size: auto;
+    max-width: 100vh;
+    max-height: 100vh;
+    width: 80%;
+    height: 80%;
     overflow: hidden;
     display: flex;
-    /* Adicione display flex para alinhar os itens internos */
     flex-direction: column;
+    vertical-align: middle;
     justify-content: center;
-    /* Alinhe horizontalmente no centro */
     align-items: center;
-    /* Alinhe verticalmente no centro */
+    overflow-x: hidden;
+    overflow-y: auto;
+
 }
 
 .chat-messages {
@@ -66,6 +68,7 @@ input#insertKeys {
     font-size: 16px;
     flex: 1;
 }
+
 .postsHeader {
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
     color: #000000;
@@ -80,6 +83,7 @@ input#insertKeys {
     height: 5%;
     width: 100%;
 }
+
 .post input[type="text"] {
     width: 100%;
     padding: 5px;
